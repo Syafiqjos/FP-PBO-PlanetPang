@@ -10,8 +10,13 @@ import java.util.Queue;
 public class SceneGameplay extends Scene {
 	private GameMaster gameMaster;
 	
+	private int rootX = 240 - 32;
+	private int rootY = 480;
+	
 	public SceneGameplay() {
 		super(480, 640);
+		
+		Ball.LoadTexture();
 		
 		addKeyListener(new TAdapter());
 		gameMaster = new GameMaster();
@@ -19,9 +24,12 @@ public class SceneGameplay extends Scene {
 	
 	@Override
 	public void drawObjects(Graphics g) {
-		List<Ball> temp = new ArrayList<Ball>(gameMaster.GetPangQueue());
+		List<Ball> temp = new ArrayList<Ball>(gameMaster.GetOldPangQueue());
 		for (Ball b : temp) {
 			if (b.isVisible()) {
+				
+				b.move(rootX,rootY + Ball.SIZE * (GameMaster.COUNT - b.getCount()));
+				b.Animating();
 				g.drawImage(b.getImage(), b.getX(), b.getY(), this);
 			}
 		}
@@ -33,18 +41,35 @@ public class SceneGameplay extends Scene {
 	}
 	
 	private class TAdapter extends KeyAdapter {
-
-	    @Override
+		private boolean left = false;
+		private boolean right = false;
+		@Override
 	    public void keyReleased(KeyEvent e) {
+			int key = e.getKeyCode();
+	        if (key == KeyEvent.VK_LEFT) {
+	        	left = false;
+	        } else if (key == KeyEvent.VK_RIGHT) {
+	        	right = false;
+	        }
 	    }
-
-	    @Override
+		
+		@Override
 	    public void keyPressed(KeyEvent e) {
 	    	int key = e.getKeyCode();
-	        if (key == KeyEvent.VK_LEFT) {
+	        if (key == KeyEvent.VK_LEFT && !left) {
 	        	gameMaster.CheckPang(0);
-	        } else if (key == KeyEvent.VK_RIGHT) {
+	        	left = true;
+	        } else if (key == KeyEvent.VK_RIGHT && !right) {
 	        	gameMaster.CheckPang(1);
+	        	right = true;
+	        }
+	        
+	        if (key == KeyEvent.VK_UP) {
+	        	GameMaster.COUNT += 1;
+	        }
+	        
+	        if (key == KeyEvent.VK_DOWN) {
+	        	GameMaster.COUNT -= 1;
 	        }
 	    }
 	}

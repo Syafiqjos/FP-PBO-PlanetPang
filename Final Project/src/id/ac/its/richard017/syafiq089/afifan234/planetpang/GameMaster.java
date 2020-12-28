@@ -6,6 +6,8 @@ import java.util.Random;
 
 public class GameMaster {
 	private Queue<Ball> pangQueue;
+	private Queue<Ball> oldPangQueue;
+	
 	private int hitCombo;
 	
 	private int state = 0;
@@ -14,6 +16,7 @@ public class GameMaster {
 	private final int MAX_COMBO = 24;
 	
 	public static int COUNT = 0;
+	public static int RAW_COUNT = 0;
 	
 	private int score;
 	
@@ -21,44 +24,56 @@ public class GameMaster {
 	
 	public GameMaster() {
 		pangQueue = new LinkedList<Ball>();
+		oldPangQueue = new LinkedList<Ball>();
 		generator = new Random();
 		
 		InitialPang();
 	}
 	
 	private void InitialPang() {
-		state = generator.nextInt() % 2; //0 atau 1 // kiri atau kanan
+		state = ((generator.nextInt() % 2) + 2) % 2; //0 atau 1 // kiri atau kanan
+		
+		System.out.printf("State %d%n",state);
 		
 		RefreshPang();
 	}
 	
 	private void RefreshPang() {
-		while (pangQueue.size() <= 16) {
+		while (pangQueue.size() < 16) {
 			GeneratePang();
 		}
 	}
 	
 	private void GeneratePang() {
-		int ctn = generator.nextInt() % 3 + 1;
+		int ctn = ((generator.nextInt() % 3) + 3) % 3 + 1;
 		
 		for (int i = 0;i < ctn;i++) {
 			AddPang(state);
 		}
 		
-		state = (state + 1) % 2;
+		state = (((state + 1) % 2) + 2) % 2;
 	}
 	
 	private void AddPang(int side) {
 		Ball b = new Ball(0,0,side);
-		//b.SetCount(count); //catatan untuk masa depan
+		b.setCount(RAW_COUNT); //catatan untuk masa depan
 		
 		pangQueue.add(b);
+		oldPangQueue.add(b);
+		
+		if (oldPangQueue.size() >= 32) {
+			oldPangQueue.remove();
+		}
 
-		COUNT++;
+		RAW_COUNT++;
 	}
 	
 	public Queue GetPangQueue() {
 		return pangQueue;
+	}
+	
+	public Queue GetOldPangQueue() {
+		return oldPangQueue;
 	}
 	
 	public Ball GetLatestPang() {
@@ -79,6 +94,8 @@ public class GameMaster {
 		AddCombo();
 		DequeuePang();
 		RefreshPang();
+		
+		COUNT++;
 		
 		System.out.println("Accepted");
 	}

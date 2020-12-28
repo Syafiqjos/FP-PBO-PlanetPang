@@ -26,10 +26,13 @@ public class Sprite {
         height = image.getHeight(null);
     }
 
-    protected void loadImage(String imageName) {
-
+    protected static Image loadImage(String imageName) {
         ImageIcon ii = new ImageIcon(imageName);
-        image = ii.getImage();
+        return ii.getImage();
+    }
+    
+    protected void loadImage(Image image) {
+        this.image = image;
     }
 
     public Image getImage() {
