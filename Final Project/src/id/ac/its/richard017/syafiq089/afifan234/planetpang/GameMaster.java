@@ -80,15 +80,17 @@ public class GameMaster {
 		return pangQueue.peek();
 	}
 	
-	public void CheckPang(int typ) {
+	public boolean CheckPang(int typ) {
 		Ball temp = GetLatestPang();
 		
 		if (temp.getSide() == typ) {
 			temp.Out();
 			AcceptPang();
+			return true;
 		} else {
 			CancelPang();
 		}
+		return false;
 	}
 	
 	public void AcceptPang() {

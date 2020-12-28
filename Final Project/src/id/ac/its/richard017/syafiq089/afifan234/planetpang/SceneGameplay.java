@@ -14,6 +14,14 @@ public class SceneGameplay extends Scene {
 	private int rootX = 240 - 32;
 	private int rootY = 480;
 	
+	private int targetX = rootX;
+	private int targetY = rootY;
+	
+	private boolean isFrenzy = true;
+	private final int frenzyDelta = 64;
+	private final int frenzyRight = rootX + 128;
+	private final int frenzyLeft = rootX - 128;
+	
 	private Image backgroundSpace;
 	
 	public SceneGameplay() {
@@ -41,6 +49,8 @@ public class SceneGameplay extends Scene {
 				g.drawImage(b.getImage(), b.getX(), b.getY(), this);
 			}
 		}
+		
+		Animating();
 	}
 	
 	@Override
@@ -65,10 +75,14 @@ public class SceneGameplay extends Scene {
 	    public void keyPressed(KeyEvent e) {
 	    	int key = e.getKeyCode();
 	        if (key == KeyEvent.VK_LEFT && !left) {
-	        	gameMaster.CheckPang(0);
+	        	if (gameMaster.CheckPang(0)) {
+	        		MoveLeft();
+	        	}
 	        	left = true;
 	        } else if (key == KeyEvent.VK_RIGHT && !right) {
-	        	gameMaster.CheckPang(1);
+	        	if (gameMaster.CheckPang(1)) {
+	        		MoveRight();
+	        	}
 	        	right = true;
 	        }
 	        
@@ -80,5 +94,51 @@ public class SceneGameplay extends Scene {
 	        	GameMaster.COUNT -= 1;
 	        }
 	    }
+	}
+	
+	public void Animating()
+    {
+    	if (isFrenzy) {
+	    	if (rootX >= 0) {
+	    		rootX = (int)Math.ceil(rootX + (targetX - rootX) * 0.4);
+	    	} else {
+	    		rootX = (int)Math.floor(rootX + (targetX - rootX) * 0.4);
+	    	}
+	    	
+	    	NormalizeTarget();
+	    	
+	    	if (rootY >= 0) {
+	    		rootY = (int)Math.ceil(rootY + (targetY - rootY) * 0.4);
+	    	} else {
+	    		rootY = (int)Math.floor(rootY + (targetY - rootY) * 0.4);
+	    	}
+    	}
+    	
+    	//x = targetX;
+    	//y = targetY;
+    }
+	
+	private void MoveLeft() {
+		targetX -= frenzyDelta;
+		NormalizeTarget();
+	}
+
+	private void MoveRight() {
+		targetX += frenzyDelta;
+		NormalizeTarget();
+	}
+	
+	private void NormalizeTarget() {
+		if (rootX >= frenzyRight) {
+    		rootX = frenzyRight;
+    	} else if (rootX <= frenzyLeft) {
+    		rootX = frenzyLeft;
+    	}
+		
+		if (targetX >= frenzyRight) {
+    		targetX = frenzyRight;
+    	} else if (targetX <= frenzyLeft) {
+    		targetX = frenzyLeft;
+    	}
 	}
 }
