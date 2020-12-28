@@ -3,14 +3,17 @@ package id.ac.its.richard0017.pangpang;
 public class Ball extends Sprite{
 
     private int outofarea=0;
-    public Ball(int x, int y) {
+    //side=1 for kanan, side=0 for kiri
+    private int side;
+    public Ball(int x, int y, int side) 
+    {
         super(x, y);
-
+        this.side = side;
         initBall();
     }
 
-    private void initBall() {
-
+    private void initBall() 
+    {
         loadImage("src/resources/ball.png");
         getImageDimensions();
     }
@@ -23,5 +26,10 @@ public class Ball extends Sprite{
         
         if (outofarea != 1)
         	x -= 1;
+    }
+    
+    public int getSide()
+    {
+    	return side;
     }
 }
