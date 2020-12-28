@@ -1,4 +1,4 @@
-package id.ac.its.richard0017.pangpang;
+package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 
 import java.awt.Image;
 import java.awt.Rectangle;
