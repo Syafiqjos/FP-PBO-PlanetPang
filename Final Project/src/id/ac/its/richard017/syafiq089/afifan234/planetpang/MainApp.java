@@ -5,10 +5,12 @@ import javax.swing.JFrame;
 
 public class MainApp extends JFrame {
 	
-	public SceneManager sceneManager; 
+	public SceneManager sceneManager;
+	public AssetManager assetManager;
 	
 	public MainApp() {
 		sceneManager = new SceneManager();
+		AssetManager.LoadAssets();		
 		
         initUI();
         sceneManager.LoadGameplayScene();

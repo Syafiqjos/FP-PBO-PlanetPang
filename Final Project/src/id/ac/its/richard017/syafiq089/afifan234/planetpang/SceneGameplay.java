@@ -1,6 +1,7 @@
 package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -13,10 +14,12 @@ public class SceneGameplay extends Scene {
 	private int rootX = 240 - 32;
 	private int rootY = 480;
 	
+	private Image backgroundSpace;
+	
 	public SceneGameplay() {
 		super(480, 640);
 		
-		Ball.LoadTexture();
+		backgroundSpace = AssetManager.BACKGROUND_SPACE; 
 		
 		addKeyListener(new TAdapter());
 		gameMaster = new GameMaster();
@@ -24,11 +27,16 @@ public class SceneGameplay extends Scene {
 	
 	@Override
 	public void drawObjects(Graphics g) {
+		
+		g.drawImage(backgroundSpace, 0, 0, this);
+		
 		List<Ball> temp = new ArrayList<Ball>(gameMaster.GetOldPangQueue());
 		for (Ball b : temp) {
 			if (b.isVisible()) {
 				
-				b.move(rootX,rootY + Ball.SIZE * (GameMaster.COUNT - b.getCount()));
+				if (!b.getOut()) {
+					b.move(rootX,rootY + Ball.SIZE * (GameMaster.COUNT - b.getCount()));
+				}
 				b.Animating();
 				g.drawImage(b.getImage(), b.getX(), b.getY(), this);
 			}

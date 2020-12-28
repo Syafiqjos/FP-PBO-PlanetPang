@@ -5,8 +5,6 @@ import java.math.*;
 
 public class Ball extends Sprite{
 	public static int SIZE = 128;
-	public static Image IMAGE_LEFT;
-	public static Image IMAGE_RIGHT;
 	
     private int outofarea=0;
     //side=1 for kanan, side=0 for kiri
@@ -15,6 +13,7 @@ public class Ball extends Sprite{
     
     public int targetX;
     public int targetY;
+    private boolean isOut;
     
     public Ball(int x, int y, int side) 
     {
@@ -22,18 +21,13 @@ public class Ball extends Sprite{
         this.side = side;
         initBall();
     }
-
-    public static void LoadTexture() {
-    	IMAGE_LEFT = loadImage("sprite/Planet1.jpg");
-    	IMAGE_RIGHT = loadImage("sprite/Planet2.png");
-    }
     
     private void initBall() 
     {
     	if (side==0)
-    		loadImage(IMAGE_LEFT);
+    		loadImage(AssetManager.PLANET_LEFT);
     	else if (side==1)
-    		loadImage(IMAGE_RIGHT);
+    		loadImage(AssetManager.PLANET_RIGHT);
     	//getImageDimensions();
     }
     
@@ -49,12 +43,7 @@ public class Ball extends Sprite{
     
     public void moveLeft() {
 
-        if (x < 0) {
-            outofarea=1;
-        }
-        
-        if (outofarea != 1)
-        	x -= 1;
+        move(-64 - 32, targetY);
     }
     
     public void move(int x, int y)
@@ -67,12 +56,20 @@ public class Ball extends Sprite{
     
     public void moveRight() {
 
-        if (x > 480) {
-            outofarea=1;
-        }
-        
-        if (outofarea != 1)
-        	x -= 1;
+    	move(480 + 64 - 32, targetY);
+    }
+    
+    public void Out() {
+    	if (side == 0) {
+    		moveLeft();
+    	} else if (side == 1) {
+    		moveRight();
+    	}
+    	isOut = true;
+    }
+    
+    public boolean getOut() {
+    	return isOut;
     }
     
     public int getSide()
@@ -96,9 +93,5 @@ public class Ball extends Sprite{
     	
     	//x = targetX;
     	//y = targetY;
-    	
-    	if (ballCount == 0) {
-    		System.out.println(y);
-    	}
     }
 }

@@ -25,11 +25,6 @@ public class Sprite {
         width = image.getWidth(null);
         height = image.getHeight(null);
     }
-
-    protected static Image loadImage(String imageName) {
-        ImageIcon ii = new ImageIcon(imageName);
-        return ii.getImage();
-    }
     
     protected void loadImage(Image image) {
         this.image = image;

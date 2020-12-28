@@ -13,7 +13,7 @@ public class Scene extends JPanel implements ActionListener, IScene {
 	
     private Timer timer;
     private boolean ingame;
-    private final int DELAY = 15;
+    private final int DELAY = 10;
     private final int B_WIDTH;
     private final int B_HEIGHT;
 

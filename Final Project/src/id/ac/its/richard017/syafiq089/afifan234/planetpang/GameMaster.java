@@ -84,6 +84,7 @@ public class GameMaster {
 		Ball temp = GetLatestPang();
 		
 		if (temp.getSide() == typ) {
+			temp.Out();
 			AcceptPang();
 		} else {
 			CancelPang();

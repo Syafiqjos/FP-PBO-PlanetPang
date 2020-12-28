@@ -1,6 +1,7 @@
 package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 
 import java.awt.Graphics;
+import java.awt.Image;
 
 public class SceneManager {
 	private Scene currentScene;
