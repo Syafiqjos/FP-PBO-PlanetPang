@@ -4,37 +4,42 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 public class SceneManager {
-	private Scene currentScene;
+	private static Scene currentScene;
 	
 	public SceneManager() {
 		
 	}
 	
-	public void LoadGameplayScene() {
+	public static void LoadGameplayScene() {
 		currentScene = new SceneGameplay();
+		MainApp.mainApp.ResetUI();
 	}
 	
-	public void LoadMainMenuScene() {
+	public static void LoadMainMenuScene() {
 		//currentScene = new SceneGameplay();
+		MainApp.mainApp.ResetUI();
 	}
 	
-	public void LoadCreditsScene() {
+	public static void LoadCreditsScene() {
 		//currentScene = new SceneGameplay();
+		MainApp.mainApp.ResetUI();
 	}
 	
-	public void LoadHowToPlayScene() {
+	public static void LoadHowToPlayScene() {
 		//currentScene = new SceneGameplay();
+		MainApp.mainApp.ResetUI();
 	}
 	
-	public void LoadHighscoreScene() {
+	public static void LoadHighscoreScene() {
 		//currentScene = new SceneGameplay();
+		MainApp.mainApp.ResetUI();
 	}
 	
-	public Scene GetScene() {
+	public static Scene GetScene() {
 		return currentScene;
 	}
 	
-	public void RefreshScene(Graphics g) {
+	public static void RefreshScene(Graphics g) {
 		currentScene.drawObjects(g);
 	}
 }

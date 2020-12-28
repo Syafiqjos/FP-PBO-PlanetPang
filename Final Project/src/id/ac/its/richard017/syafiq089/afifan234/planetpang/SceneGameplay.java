@@ -1,5 +1,8 @@
 package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -22,7 +25,32 @@ public class SceneGameplay extends Scene {
 	private final int frenzyRight = rootX + 128;
 	private final int frenzyLeft = rootX - 128;
 	
+	private final int scorePosX = 320;
+	private final int scorePosY = 40;
+	
+	private final int comboPosX = 320;
+	private final int comboPosY = 420;
+	
+	private final int FPS = 60;
+	private int gameplayCounter = FPS * 60;
+	private int errorCounter = 0;
+	
+	private boolean isGameOver = false;
+	private final int gameOverPosX = 180;
+	private final int gameOverPosY = 320;
+	private int gameOverCounter = FPS * 3;
+	
+	private final int ERROR_MAX = 3 * FPS;
+	private boolean isError = false;
+	
+	private final int errorPosX = 240;
+	private final int errorPosY = 320;
+	
 	private Image backgroundSpace;
+	
+	private final Font small = new Font("AgencyFB", Font.BOLD, 24);
+	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
+	private final Font big = new Font("AgencyFB", Font.BOLD, 64);
 	
 	public SceneGameplay() {
 		super(480, 640);
@@ -51,6 +79,65 @@ public class SceneGameplay extends Scene {
 		}
 		
 		Animating();
+		if (!isGameOver) {
+			DrawUI(g);
+		} else {
+			DrawGameOver(g);
+		}
+	}
+	
+	private void DrawGameOver(Graphics g) {
+		g.setFont(medium);
+		g.setColor(Color.white);
+		g.drawString("Game Over", gameOverPosX, gameOverPosY);
+	
+		if (gameOverCounter > 0) {
+			gameOverCounter -= 1;
+		} else {
+			//Load Highscore
+			SceneManager.LoadGameplayScene();
+		}
+	}
+	
+	private void DrawUI(Graphics g) {
+        g.setFont(medium);
+        
+        g.setColor(Color.WHITE);
+		g.drawString("Combo", comboPosX, comboPosY);
+        
+		if (gameMaster.GetCombo() > 0) {
+			String msg = String.format("%d",gameMaster.GetCombo());
+			
+	        g.setColor(Color.white);
+			g.drawString(msg, comboPosX + 12, comboPosY + 48);
+		}
+		
+		if (isError) {
+			g.setFont(big);
+			if (errorCounter > 0) {
+				String msg = String.format("%d",(int)Math.ceil(errorCounter) / FPS + 1); 
+				g.drawString(msg, errorPosX, errorPosY);
+				errorCounter -= 1;
+			} else {
+				isError = false;
+			}
+		}
+		
+		//Score
+		g.setFont(small);
+		g.setColor(Color.white);
+		g.drawString(String.format("Score : %d",gameMaster.GetScore()), scorePosX, scorePosY);
+		
+		//Timer
+		if (gameplayCounter > 0) {
+			g.setFont(small);
+			g.setColor(Color.white);
+			g.drawString(String.format("Time : %d",gameplayCounter / FPS + 1), scorePosX, scorePosY + 32);
+			
+			gameplayCounter -= 1;
+		} else {
+			isGameOver = true;
+		}
 	}
 	
 	@Override
@@ -73,26 +160,32 @@ public class SceneGameplay extends Scene {
 		
 		@Override
 	    public void keyPressed(KeyEvent e) {
-	    	int key = e.getKeyCode();
-	        if (key == KeyEvent.VK_LEFT && !left) {
-	        	if (gameMaster.CheckPang(0)) {
-	        		MoveLeft();
-	        	}
-	        	left = true;
-	        } else if (key == KeyEvent.VK_RIGHT && !right) {
-	        	if (gameMaster.CheckPang(1)) {
-	        		MoveRight();
-	        	}
-	        	right = true;
-	        }
-	        
-	        if (key == KeyEvent.VK_UP) {
-	        	GameMaster.COUNT += 1;
-	        }
-	        
-	        if (key == KeyEvent.VK_DOWN) {
-	        	GameMaster.COUNT -= 1;
-	        }
+			if (!isError && !isGameOver) {
+		    	int key = e.getKeyCode();
+		        if (key == KeyEvent.VK_LEFT && !left) {
+		        	if (gameMaster.CheckPang(0)) {
+		        		MoveLeft();
+		        	} else {
+		        		SetError();
+		        	}
+		        	left = true;
+		        } else if (key == KeyEvent.VK_RIGHT && !right) {
+		        	if (gameMaster.CheckPang(1)) {
+		        		MoveRight();
+		        	} else {
+		        		SetError();
+		        	}
+		        	right = true;
+		        }
+		        
+		        if (key == KeyEvent.VK_UP) {
+		        	GameMaster.COUNT += 1;
+		        }
+		        
+		        if (key == KeyEvent.VK_DOWN) {
+		        	GameMaster.COUNT -= 1;
+		        }
+			}
 	    }
 	}
 	
@@ -140,5 +233,10 @@ public class SceneGameplay extends Scene {
     	} else if (targetX <= frenzyLeft) {
     		targetX = frenzyLeft;
     	}
+	}
+	
+	private void SetError() {
+		isError = true;
+		errorCounter = ERROR_MAX;
 	}
 }

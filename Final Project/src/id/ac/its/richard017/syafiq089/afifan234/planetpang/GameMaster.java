@@ -12,7 +12,7 @@ public class GameMaster {
 	
 	private int state = 0;
 	
-	private final int BASE_SCORE = 100;
+	private final int BASE_SCORE = 10;
 	private final int MAX_COMBO = 24;
 	
 	public static int COUNT = 0;
@@ -31,6 +31,9 @@ public class GameMaster {
 	}
 	
 	private void InitialPang() {
+		COUNT = 0;
+		RAW_COUNT = 0;
+		
 		state = ((generator.nextInt() % 2) + 2) % 2; //0 atau 1 // kiri atau kanan
 		
 		System.out.printf("State %d%n",state);

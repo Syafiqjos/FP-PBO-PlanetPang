@@ -4,12 +4,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 public class MainApp extends JFrame {
+	public static MainApp mainApp;
 	
-	public SceneManager sceneManager;
-	public AssetManager assetManager;
+	public static SceneManager sceneManager;
+	public static AssetManager assetManager;
+	public static HighscoreSystem highscoreSystem;
 	
 	public MainApp() {
+		mainApp = this;
 		sceneManager = new SceneManager();
+		highscoreSystem = new HighscoreSystem();
 		AssetManager.LoadAssets();		
 		
         initUI();
@@ -22,7 +26,7 @@ public class MainApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    private void ResetUI() {
+    public void ResetUI() {
     	getContentPane().removeAll();
     	repaint();
     	
