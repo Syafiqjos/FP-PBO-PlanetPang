@@ -8,8 +8,12 @@ public class GameMaster {
 	private Queue<Ball> pangQueue;
 	private int hitCombo;
 	
+	private int state = 0;
+	
 	private final int BASE_SCORE = 100;
 	private final int MAX_COMBO = 24;
+	
+	public static int COUNT = 0;
 	
 	private int score;
 	
@@ -18,21 +22,39 @@ public class GameMaster {
 	public GameMaster() {
 		pangQueue = new LinkedList<Ball>();
 		generator = new Random();
+		
+		InitialPang();
+	}
+	
+	private void InitialPang() {
+		state = generator.nextInt() % 2; //0 atau 1 // kiri atau kanan
+		
+		RefreshPang();
 	}
 	
 	private void RefreshPang() {
-		if (pangQueue.size() <= 16) {
-			AddPang();
+		while (pangQueue.size() <= 16) {
+			GeneratePang();
 		}
 	}
 	
-	private void AddPang() {
+	private void GeneratePang() {
 		int ctn = generator.nextInt() % 3 + 1;
-		int ran = generator.nextInt() % 2; //0 atau 1 // kiri atau kanan
 		
 		for (int i = 0;i < ctn;i++) {
-			pangQueue.add(new Ball(0,0,ran));
+			AddPang(state);
 		}
+		
+		state = (state + 1) % 2;
+	}
+	
+	private void AddPang(int side) {
+		Ball b = new Ball(0,0,side);
+		//b.SetCount(count); //catatan untuk masa depan
+		
+		pangQueue.add(b);
+
+		COUNT++;
 	}
 	
 	public Queue GetPangQueue() {
@@ -43,26 +65,33 @@ public class GameMaster {
 		return pangQueue.peek();
 	}
 	
-	public boolean CheckPang(int typ) {
+	public void CheckPang(int typ) {
 		Ball temp = GetLatestPang();
 		
 		if (temp.getSide() == typ) {
 			AcceptPang();
-			return true;
 		} else {
 			CancelPang();
 		}
-		
-		return false;
 	}
 	
 	public void AcceptPang() {
+		AddCombo();
+		DequeuePang();
 		RefreshPang();
+		
+		System.out.println("Accepted");
 	}
 	
 	public void CancelPang() {
 		ResetCombo();
 		RefreshPang();
+		
+		System.out.println("Cancelled");
+	}
+	
+	private void DequeuePang() {
+		pangQueue.remove();
 	}
 	
 	private void AddCombo() {

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Scene extends JPanel implements ActionListener, IScene {
-
+	
     private Timer timer;
     private boolean ingame;
     private final int DELAY = 15;
@@ -29,10 +29,7 @@ public class Scene extends JPanel implements ActionListener, IScene {
     	initBoard();
     }
 
-    private void initBoard() {
-
-        addKeyListener(new TAdapter());
-        
+    private void initBoard() {        
         MouseHandler tempHandler = new MouseHandler(B_WIDTH, B_HEIGHT);
         
         addMouseMotionListener(tempHandler);
@@ -75,7 +72,7 @@ public class Scene extends JPanel implements ActionListener, IScene {
             timer.stop();
         }
     }
-
+    
 	@Override
 	public void drawObjects(Graphics g) {
 		// TODO Auto-generated method stub
