@@ -1,5 +1,5 @@
-# Final Project - Dashing Me
-Merupakan sebuah Final Project dari mata kuliah Pemrograman Berbasis Objek, yaitu membuat aplikasi atau game, dengan referensi atau ide sendiri, sebagai penilaian pemahaman mahasiswa dalam mengerjakan suatu project.
+# Final Project - Planet Pang
+Merupakan sebuah Final Project dari mata kuliah Pemrograman Berbasis Objek, yaitu membuat aplikasi atau game, dengan referensi atau ide sendiri yang ditambahkan suatu fitur baru, sebagai penilaian pemahaman mahasiswa dalam mengerjakan suatu project.
 
 # Pemrograman Berbasis Objek E
 ## Anggota Kelompok :
