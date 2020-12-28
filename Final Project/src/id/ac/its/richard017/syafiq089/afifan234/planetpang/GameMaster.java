@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class GameMaster {
-	private Queue<Integer> pangQueue;
+	private Queue<Ball> pangQueue;
 	private int hitCombo;
 	
 	private final int BASE_SCORE = 100;
@@ -16,7 +16,7 @@ public class GameMaster {
 	private final Random generator;
 	
 	public GameMaster() {
-		pangQueue = new LinkedList<Integer>();
+		pangQueue = new LinkedList<Ball>();
 		generator = new Random();
 	}
 	
@@ -31,7 +31,7 @@ public class GameMaster {
 		int ran = generator.nextInt() % 2; //0 atau 1 // kiri atau kanan
 		
 		for (int i = 0;i < ctn;i++) {
-			pangQueue.add(ran);
+			pangQueue.add(new Ball(0,0,ran));
 		}
 	}
 	
@@ -39,14 +39,14 @@ public class GameMaster {
 		return pangQueue;
 	}
 	
-	public int GetLatestPang() {
+	public Ball GetLatestPang() {
 		return pangQueue.peek();
 	}
 	
 	public boolean CheckPang(int typ) {
-		int temp = GetLatestPang();
+		Ball temp = GetLatestPang();
 		
-		if (temp == typ) {
+		if (temp.getSide() == typ) {
 			AcceptPang();
 			return true;
 		} else {
