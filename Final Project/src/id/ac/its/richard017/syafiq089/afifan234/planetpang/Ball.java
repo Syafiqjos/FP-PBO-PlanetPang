@@ -5,6 +5,8 @@ public class Ball extends Sprite{
     private int outofarea=0;
     //side=1 for kanan, side=0 for kiri
     private int side;
+    int ballCount;
+    
     public Ball(int x, int y, int side) 
     {
         super(x, y);
@@ -14,13 +16,36 @@ public class Ball extends Sprite{
 
     private void initBall() 
     {
-        loadImage("src/resources/ball.png");
-        getImageDimensions();
+    	if (side==0)
+    		loadImage("sprite/ball0.png");
+    	else if (side==1)
+    		loadImage("sprite/ball1.png");
+    	getImageDimensions();
     }
-
-    public void moveleft() {
+    
+    public int getCount()
+    {
+    	return ballCount;
+    }
+    
+    public void setCount(int ballCount)
+    {
+    	this.ballCount = ballCount;
+    }
+    
+    public void moveLeft() {
 
         if (x < 0) {
+            outofarea=1;
+        }
+        
+        if (outofarea != 1)
+        	x -= 1;
+    }
+    
+    public void moveRight() {
+
+        if (x > 480) {
             outofarea=1;
         }
         
@@ -31,5 +56,10 @@ public class Ball extends Sprite{
     public int getSide()
     {
     	return side;
+    }
+    
+    public void Animating()
+    {
+    	
     }
 }
