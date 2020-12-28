@@ -43,6 +43,12 @@ public class Ball extends Sprite{
         	x -= 1;
     }
     
+    public void move(int x, int y)
+    {
+    	this.x = x;
+    	this.y = y;
+    }
+    
     public void moveRight() {
 
         if (x > 480) {
