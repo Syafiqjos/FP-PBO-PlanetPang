@@ -112,7 +112,7 @@ public class SceneGameplay extends Scene {
 		} else {
 			//Load Highscore
 			if (!loadedScene) {
-				MainApp.sceneManager.LoadGameplayScene();
+				SceneManager.LoadGameplayScene();
 				loadedScene = true;
 			}
 		}

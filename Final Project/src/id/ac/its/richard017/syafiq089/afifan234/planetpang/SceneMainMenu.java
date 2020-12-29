@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Queue;
 
-public class MainMenuScene extends Scene {
+public class SceneMainMenu extends Scene {
 	private GameMaster gameMaster;
 	
 	private int rootX = 240 - 32;
@@ -52,7 +52,7 @@ public class MainMenuScene extends Scene {
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
 	private final Font big = new Font("AgencyFB", Font.BOLD, 64);
 	
-	public MainMenuScene() {
+	public SceneMainMenu() {
 		super(480, 640);
 		
 		backgroundSpace = AssetManager.BACKGROUND_SPACE; 
