@@ -19,6 +19,7 @@ public class GameMaster {
 	public static int RAW_COUNT = 0;
 	
 	private int score;
+	private int highscore = 0;
 	
 	private final Random generator;
 	
@@ -28,6 +29,8 @@ public class GameMaster {
 		generator = new Random();
 		
 		InitialPang();
+		
+		LoadHighscore();
 	}
 	
 	private void InitialPang() {
@@ -141,5 +144,24 @@ public class GameMaster {
 			temp = MAX_COMBO;
 		}
 		score += BASE_SCORE + temp;
+	}
+	
+	public void LoadHighscore() {
+		highscore = MainApp.highscoreSystem.loadHighScore();
+	}
+
+	public void SaveHighscore() {
+		MainApp.highscoreSystem.saveHighScore(highscore);
+	}
+	
+	public void UpdateHighscore() {
+		if (score > highscore) {
+			highscore = score;
+		}
+		SaveHighscore();
+	}
+	
+	public int GetHighscore() {
+		return highscore;
 	}
 }

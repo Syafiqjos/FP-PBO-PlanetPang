@@ -95,7 +95,7 @@ public class MainMenuScene extends Scene {
 			gameOverCounter -= 1;
 		} else {
 			//Load Highscore
-			SceneManager.LoadGameplayScene();
+			MainApp.sceneManager.LoadGameplayScene();
 		}
 	}
 	
