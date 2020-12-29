@@ -13,7 +13,7 @@ Merupakan sebuah Final Project dari mata kuliah Pemrograman Berbasis Objek, yait
 Planet pang adalah sebuah game yang melatih kecepatan berpikir serta
 ketangkasan pemain.
 ### 2. Gameplay
-![PlanetPang - Gameplay](/images/PlanetPangGameplay.png)
+![PlanetPang - Gameplay](/Images/PlanetPangGameplay.png)
 Pemain akan disuguhkan oleh dua planet imut yang memiliki perlakuan berbeda. yang pertama adalah planet biru, dan yang kedua adalah planet oranye. Sistem yang digunakan disini hampir mirip dengan antrian, dengan antrian depanberada pada bagian paling bawah yang berarti harus diberi perlakuan terlebih dahulu.Jika planet paling bawah adalah planet berwarna biru, maka player harus menggeserke kiri planet tersebut.Atau jika planet paling bawah adalah planet berwarna oranye, maka pemain harusmenggeser ke kanan planet tersebut.Setelah planet tersebut diberlakukan dengan benar, maka planet yang ada diatasnya(antrian sebelumnya) akan turun ke bawah menjadi antrian terdepan. planet inilah yangharus diberi perlakuan selanjutnya. Namun perlu diperhatikan, jika pemain memberikan perlakuan yang salah pada planet(Misalnya pemain menggeser ke kiri planet berwarna oranye), maka pemain tidak akan bisamemberikan perlakuan selama beberapa saat pada waktu tertentu, sehingga waktuyang dapat dimanfaatkan pun berkurang. game berakhir saat waktu yang diberikantelah habis.
 
 ### 3. Kontrol
