@@ -26,26 +26,13 @@ public class HighscoreSystem implements Serializable{
 	{
 		this.highScore = highScore;
 	}
-	public static void createHighScoreFile()
-	{
-		try
-		{
-			output = new ObjectOutputStream(
-					Files.newOutputStream(Paths.get("clients.ser")));
-		}
-		catch (IOException ioException)
-		{
-			System.err.println("Error opening file. Terminating.");
-			System.exit(1);
-		}
-	}
 	
 	public int loadHighScore()
 	{
 		try
 		{
 			input = new ObjectInputStream(
-					Files.newInputStream(Paths.get("clients.ser")));
+					Files.newInputStream(Paths.get("data.bin")));
 		}
 		catch (IOException ioException)
 		{
@@ -71,7 +58,7 @@ public class HighscoreSystem implements Serializable{
 		try
 		{
 			output = new ObjectOutputStream(
-					Files.newOutputStream(Paths.get("clients.ser")));
+					Files.newOutputStream(Paths.get("data.bin")));
 		}
 		catch (IOException ioException)
 		{
