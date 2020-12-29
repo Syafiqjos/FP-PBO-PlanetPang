@@ -14,7 +14,6 @@ public class MainApp extends JFrame {
 		mainApp = this;
 		sceneManager = new SceneManager();
 		highscoreSystem = new HighscoreSystem();
-		
 		AssetManager.LoadAssets();		
 		
         initUI();
@@ -34,8 +33,6 @@ public class MainApp extends JFrame {
         
         setResizable(false);
         pack();
-        
-        transferFocus();
         
         setLocationRelativeTo(null);
     }

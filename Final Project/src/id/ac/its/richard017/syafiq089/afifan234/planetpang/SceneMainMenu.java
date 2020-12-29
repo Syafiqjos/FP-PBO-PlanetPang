@@ -20,33 +20,10 @@ public class SceneMainMenu extends Scene {
 	private int targetX = rootX;
 	private int targetY = rootY;
 	
-	private boolean isFrenzy = true;
-	private final int frenzyDelta = 64;
-	private final int frenzyRight = rootX + 128;
-	private final int frenzyLeft = rootX - 128;
+//	private Image backgroundSpace;
+	private Image buttonStart;
+	private Image buttonExit;
 	
-	private final int scorePosX = 320;
-	private final int scorePosY = 40;
-	
-	private final int comboPosX = 320;
-	private final int comboPosY = 420;
-	
-	private final int FPS = 60;
-	private int gameplayCounter = FPS * 60;
-	private int errorCounter = 0;
-	
-	private boolean isGameOver = false;
-	private final int gameOverPosX = 180;
-	private final int gameOverPosY = 320;
-	private int gameOverCounter = FPS * 3;
-	
-	private final int ERROR_MAX = 3 * FPS;
-	private boolean isError = false;
-	
-	private final int errorPosX = 240;
-	private final int errorPosY = 320;
-	
-	private Image backgroundSpace;
 	
 	private final Font small = new Font("AgencyFB", Font.BOLD, 24);
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
