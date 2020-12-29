@@ -6,9 +6,10 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Formatter;
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class HighscoreSystem {
+public class HighscoreSystem implements Serializable{
 
 	private int score;
 	private int highScore;
