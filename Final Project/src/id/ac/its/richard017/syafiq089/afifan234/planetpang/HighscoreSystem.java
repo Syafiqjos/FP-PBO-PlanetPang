@@ -1,14 +1,12 @@
 package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 
-import java.io.EOFException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Formatter;
-
+import java.util.NoSuchElementException;
 
 public class HighscoreSystem {
 
@@ -16,6 +14,7 @@ public class HighscoreSystem {
 	private int highScore;
 	private static ObjectOutputStream output;
 	private static ObjectInputStream input;
+	HighscoreSystem record;
 	
 	public HighscoreSystem()
 	{
@@ -40,7 +39,7 @@ public class HighscoreSystem {
 		}
 	}
 	
-	public void checkHighScore()
+	public int loadHighScore()
 	{
 		try
 		{
@@ -54,11 +53,7 @@ public class HighscoreSystem {
 		}
 		try
 		{
-				HighscoreSystem record = (HighscoreSystem) input.readObject();
-				if (record.getHighScore() < this.highScore)
-				{
-					this.highScore = record.getHighScore();
-				}
+			record = (HighscoreSystem) input.readObject();	
 		}
 		catch (ClassNotFoundException classNotFoundException)
 		{
@@ -66,16 +61,34 @@ public class HighscoreSystem {
 		}
 		catch (IOException ioException)
 		{
-			System.err.println("Error reading from file. Terminating.");
+		}
+		return record.getHighScore();
+	}
+	
+	public void saveHighScore(int score)
+	{
+		try
+		{
+			output = new ObjectOutputStream(
+					Files.newOutputStream(Paths.get("clients.ser")));
+		}
+		catch (IOException ioException)
+		{
+			System.err.println("Error opening file. Terminating.");
+			System.exit(1);
+		}
+		try
+		{
+			record = new HighscoreSystem(score);
+			output.writeObject(record);
+		}
+		catch (IOException ioException)
+		{
 		}
 	}
 	
 	public int getHighScore()
 	{
 		return highScore;
-	}
-	public static void checkScore()
-	{
-		
 	}
 }
