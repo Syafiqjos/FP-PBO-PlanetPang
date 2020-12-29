@@ -17,7 +17,7 @@ public class MainApp extends JFrame {
 		AssetManager.LoadAssets();		
 		
         initUI();
-        SceneManager.LoadGameplayScene();
+        SceneManager.LoadHighscoreScene();
     }
     
     private void initUI() {
@@ -33,6 +33,8 @@ public class MainApp extends JFrame {
         
         setResizable(false);
         pack();
+        
+        transferFocus();
         
         setLocationRelativeTo(null);
     }

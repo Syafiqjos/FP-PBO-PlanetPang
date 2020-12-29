@@ -20,22 +20,55 @@ public class SceneMainMenu extends Scene {
 	private int targetX = rootX;
 	private int targetY = rootY;
 	
-//	private Image backgroundSpace;
-	private Image buttonStart;
-	private Image buttonExit;
+	private boolean isFrenzy = true;
+	private final int frenzyDelta = 64;
+	private final int frenzyRight = rootX + 128;
+	private final int frenzyLeft = rootX - 128;
 	
+	private final int scorePosX = 320;
+	private final int scorePosY = 40;
+	
+	private final int comboPosX = 320;
+	private final int comboPosY = 420;
+	
+	private final int FPS = 60;
+	private int gameplayCounter = FPS * 5;
+	private int errorCounter = 0;
+	
+	private boolean isGameOver = false;
+	private final int gameOverPosX = 180;
+	private final int gameOverPosY = 320;
+	private int gameOverCounter = FPS * 3;
+	
+	private final int ERROR_MAX = 3 * FPS;
+	private boolean isError = false;
+	
+	private final int errorPosX = 240;
+	private final int errorPosY = 320;
+	
+	private boolean highscoreSaved = false;
+	
+	private Image backgroundSpace;
 	
 	private final Font small = new Font("AgencyFB", Font.BOLD, 24);
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
 	private final Font big = new Font("AgencyFB", Font.BOLD, 64);
 	
+	private boolean loadedScene = false;
+	
 	public SceneMainMenu() {
 		super(480, 640);
+
+		isGameOver = false;
+		isError = false;
+		highscoreSaved = false;
 		
 		backgroundSpace = AssetManager.BACKGROUND_SPACE; 
 		
 		addKeyListener(new TAdapter());
+		
 		gameMaster = new GameMaster();
+		gameMaster.LoadHighscore();
 	}
 	
 	@Override
@@ -66,13 +99,22 @@ public class SceneMainMenu extends Scene {
 	private void DrawGameOver(Graphics g) {
 		g.setFont(medium);
 		g.setColor(Color.white);
-		g.drawString("Game Over", gameOverPosX, gameOverPosY);
+		g.drawString(("Game Over"), gameOverPosX, gameOverPosY);
+		g.drawString(String.format("%d", gameMaster.GetScore()), gameOverPosX + 10, gameOverPosY + 64);
+		
+		if (!highscoreSaved) {
+			gameMaster.UpdateHighscore();
+			highscoreSaved = true;
+		}
 	
 		if (gameOverCounter > 0) {
 			gameOverCounter -= 1;
 		} else {
 			//Load Highscore
-			MainApp.sceneManager.LoadGameplayScene();
+			if (!loadedScene) {
+				SceneManager.LoadGameplayScene();
+				loadedScene = true;
+			}
 		}
 	}
 	
@@ -104,12 +146,13 @@ public class SceneMainMenu extends Scene {
 		g.setFont(small);
 		g.setColor(Color.white);
 		g.drawString(String.format("Score : %d",gameMaster.GetScore()), scorePosX, scorePosY);
+		g.drawString(String.format("HScore : %d",gameMaster.GetHighscore()), scorePosX, scorePosY + 32);
 		
 		//Timer
 		if (gameplayCounter > 0) {
 			g.setFont(small);
 			g.setColor(Color.white);
-			g.drawString(String.format("Time : %d",gameplayCounter / FPS + 1), scorePosX, scorePosY + 32);
+			g.drawString(String.format("Time : %d",gameplayCounter / FPS + 1), scorePosX, scorePosY + 64);
 			
 			gameplayCounter -= 1;
 		} else {
@@ -120,50 +163,6 @@ public class SceneMainMenu extends Scene {
 	@Override
 	public void clearObjects(Graphics g) {
 		
-	}
-	
-	private class TAdapter extends KeyAdapter {
-		private boolean left = false;
-		private boolean right = false;
-		@Override
-	    public void keyReleased(KeyEvent e) {
-			int key = e.getKeyCode();
-	        if (key == KeyEvent.VK_LEFT) {
-	        	left = false;
-	        } else if (key == KeyEvent.VK_RIGHT) {
-	        	right = false;
-	        }
-	    }
-		
-		@Override
-	    public void keyPressed(KeyEvent e) {
-			if (!isError && !isGameOver) {
-		    	int key = e.getKeyCode();
-		        if (key == KeyEvent.VK_LEFT && !left) {
-		        	if (gameMaster.CheckPang(0)) {
-		        		MoveLeft();
-		        	} else {
-		        		SetError();
-		        	}
-		        	left = true;
-		        } else if (key == KeyEvent.VK_RIGHT && !right) {
-		        	if (gameMaster.CheckPang(1)) {
-		        		MoveRight();
-		        	} else {
-		        		SetError();
-		        	}
-		        	right = true;
-		        }
-		        
-		        if (key == KeyEvent.VK_UP) {
-		        	GameMaster.COUNT += 1;
-		        }
-		        
-		        if (key == KeyEvent.VK_DOWN) {
-		        	GameMaster.COUNT -= 1;
-		        }
-			}
-	    }
 	}
 	
 	public void Animating()
@@ -216,5 +215,48 @@ public class SceneMainMenu extends Scene {
 		isError = true;
 		errorCounter = ERROR_MAX;
 	}
+	
+	private class TAdapter extends KeyAdapter {
+		private boolean left = false;
+		private boolean right = false;
+		@Override
+	    public void keyReleased(KeyEvent e) {
+			int key = e.getKeyCode();
+	        if (key == KeyEvent.VK_LEFT) {
+	        	left = false;
+	        } else if (key == KeyEvent.VK_RIGHT) {
+	        	right = false;
+	        }
+	    }
+		
+		@Override
+	    public void keyPressed(KeyEvent e) {
+			if (!isError && !isGameOver) {
+		    	int key = e.getKeyCode();
+		        if (key == KeyEvent.VK_LEFT && !left) {
+		        	if (gameMaster.CheckPang(0)) {
+		        		MoveLeft();
+		        	} else {
+		        		SetError();
+		        	}
+		        	left = true;
+		        } else if (key == KeyEvent.VK_RIGHT && !right) {
+		        	if (gameMaster.CheckPang(1)) {
+		        		MoveRight();
+		        	} else {
+		        		SetError();
+		        	}
+		        	right = true;
+		        }
+		        
+		        if (key == KeyEvent.VK_UP) {
+		        	GameMaster.COUNT += 1;
+		        }
+		        
+		        if (key == KeyEvent.VK_DOWN) {
+		        	GameMaster.COUNT -= 1;
+		        }
+			}
+	    }
+	}
 }
-

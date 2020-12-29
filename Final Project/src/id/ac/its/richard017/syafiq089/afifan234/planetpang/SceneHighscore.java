@@ -1,5 +1,6 @@
 package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,9 +11,9 @@ public class SceneHighscore extends Scene {
 	
 	private Image backgroundSpace;
 	
-	private final Font small = new Font("AgencyFB", Font.BOLD, 24);
+	private final Font small = new Font("AgencyFB", Font.BOLD, 16);
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
-	private final Font big = new Font("AgencyFB", Font.BOLD, 64);
+	private final Font big = new Font("AgencyFB", Font.BOLD, 54);
 	
 	public SceneHighscore() {
 		super(480, 640);
@@ -25,6 +26,28 @@ public class SceneHighscore extends Scene {
 	@Override
 	public void drawObjects(Graphics g) {
 		g.drawImage(backgroundSpace, 0, 0, this);
+		
+		DrawText(g, "LEADERBOARD :", 2, 20, 160);
+		DrawText(g, "Planet Pang", 1, 20, 220);
+		
+		DrawText(g, String.format("HIGHSCORE : %d", MainApp.highscoreSystem.loadHighScore()), 0, 20, 310);
+		DrawText(g, String.format("SCORE : %d", GameMaster.GetScore()), 0, 20, 340);
+		
+		DrawText(g, "[ Press Enter to Play Again ]", 0, 20, 440);
+		DrawText(g, "[ Press Backspace to Main Menu ]", 0, 20, 470);
+	}
+	
+	public void DrawText(Graphics g, String msg, int id, int posX, int posY) {
+		if (id == 0) {
+			g.setFont(small);
+		} else if (id == 1){
+			g.setFont(medium);
+		} else {
+			g.setFont(big);
+		}
+		
+		g.setColor(Color.white);
+		g.drawString(msg, posX, posY);
 	}
 	
 	private class TAdapter extends KeyAdapter {
@@ -41,7 +64,10 @@ public class SceneHighscore extends Scene {
 		@Override
 	    public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			if (!back && (key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER)) {
+			if (!back && (key == KeyEvent.VK_ENTER)) {
+				SceneManager.LoadGameplayScene();
+	        	back = true;
+	        } else if (!back && (key == KeyEvent.VK_ENTER)) {
 				SceneManager.LoadMainMenuScene();
 	        	back = true;
 	        }

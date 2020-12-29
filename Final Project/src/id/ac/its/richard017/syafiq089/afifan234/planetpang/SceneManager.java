@@ -31,7 +31,7 @@ public class SceneManager {
 	}
 	
 	public static void LoadHighscoreScene() {
-		//currentScene = new SceneGameplay();
+		currentScene = new SceneHighscore();
 		MainApp.mainApp.ResetUI();
 	}
 	

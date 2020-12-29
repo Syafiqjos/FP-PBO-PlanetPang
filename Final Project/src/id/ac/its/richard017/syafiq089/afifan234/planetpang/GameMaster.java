@@ -18,7 +18,7 @@ public class GameMaster {
 	public static int COUNT = 0;
 	public static int RAW_COUNT = 0;
 	
-	private int score;
+	private static int score;
 	private int highscore = 0;
 	
 	private final Random generator;
@@ -27,6 +27,8 @@ public class GameMaster {
 		pangQueue = new LinkedList<Ball>();
 		oldPangQueue = new LinkedList<Ball>();
 		generator = new Random();
+		
+		score = 0;
 		
 		InitialPang();
 		
@@ -133,7 +135,7 @@ public class GameMaster {
 		return hitCombo;
 	}
 	
-	public int GetScore() {
+	public static int GetScore() {
 		return score;
 	}
 	
