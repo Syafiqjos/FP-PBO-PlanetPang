@@ -44,14 +44,14 @@ private Image arrowDown;
 	@Override
 	public void drawObjects(Graphics g) {
 		g.drawImage(backgroundMenu, 0, 0, this);
-		g.drawImage(arrowUp,219,215,this);
-		g.drawImage(buttonStart,170,270,this);
+		g.drawImage(arrowUp,232,215,this);
+		g.drawImage(buttonStart,183,235,this);
 		g.drawImage(arrowLeft,0,399,this);
-		g.drawImage(buttonCredits,48,390,this);
-		g.drawImage(arrowRight,416,399,this);
-		g.drawImage(buttonHighscore,275,390,this);
-		g.drawImage(arrowDown,219,576,this);
-		g.drawImage(buttonExit,170,506,this);
+		g.drawImage(buttonCredits,15,383,this);
+		g.drawImage(arrowRight,454,399,this);
+		g.drawImage(buttonHighscore,345,383,this);
+		g.drawImage(arrowDown,232,616,this);
+		g.drawImage(buttonExit,183,560,this);
 		DrawText(g, "Welcome to", 1, 125, 100);
 		
 	}
