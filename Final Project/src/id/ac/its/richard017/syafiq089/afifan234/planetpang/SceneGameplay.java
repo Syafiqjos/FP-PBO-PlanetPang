@@ -32,7 +32,7 @@ public class SceneGameplay extends Scene {
 	private final int comboPosY = 420;
 	
 	private final int FPS = 60;
-	private int gameplayCounter = FPS * 5;
+	private int gameplayCounter = FPS * 60;
 	private int errorCounter = 0;
 	
 	private boolean isGameOver = false;
