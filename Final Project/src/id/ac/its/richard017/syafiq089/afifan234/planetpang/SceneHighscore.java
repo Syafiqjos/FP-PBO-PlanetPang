@@ -33,7 +33,7 @@ public class SceneHighscore extends Scene {
 		DrawText(g, String.format("HIGHSCORE : %d", MainApp.highscoreSystem.loadHighScore()), 0, 20, 310);
 		DrawText(g, String.format("SCORE : %d", GameMaster.GetScore()), 0, 20, 340);
 		
-		DrawText(g, "[ Press Enter to Play Again ]", 0, 20, 440);
+		DrawText(g, "[ Press Enter to Play ]", 0, 20, 440);
 		DrawText(g, "[ Press Backspace to Main Menu ]", 0, 20, 470);
 	}
 	
@@ -67,7 +67,7 @@ public class SceneHighscore extends Scene {
 			if (!back && (key == KeyEvent.VK_ENTER)) {
 				SceneManager.LoadGameplayScene();
 	        	back = true;
-	        } else if (!back && (key == KeyEvent.VK_ENTER)) {
+	        } else if (!back && (key == KeyEvent.VK_BACK_SPACE)) {
 				SceneManager.LoadMainMenuScene();
 	        	back = true;
 	        }

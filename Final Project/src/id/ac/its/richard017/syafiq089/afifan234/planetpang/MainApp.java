@@ -17,7 +17,7 @@ public class MainApp extends JFrame {
 		AssetManager.LoadAssets();		
 		
         initUI();
-        SceneManager.LoadHighscoreScene();
+        SceneManager.LoadMainMenuScene();
     }
     
     private void initUI() {
