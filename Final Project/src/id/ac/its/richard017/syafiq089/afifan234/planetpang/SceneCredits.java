@@ -50,6 +50,13 @@ public class SceneCredits extends Scene {
 		g.drawString(msg, posX, posY);
 	}
 	
+	public void DrawText(Graphics g, String msg, Font id, int posX, int posY) {
+		g.setFont(id);
+		
+		g.setColor(Color.white);
+		g.drawString(msg, posX, posY);
+	}
+	
 	private class TAdapter extends KeyAdapter {
 		private boolean back = false;
 		

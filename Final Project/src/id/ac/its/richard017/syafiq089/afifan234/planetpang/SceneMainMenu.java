@@ -52,7 +52,7 @@ private Image arrowDown;
 		g.drawImage(buttonHighscore,345,383,this);
 		g.drawImage(arrowDown,232,616,this);
 		g.drawImage(buttonExit,183,560,this);
-		DrawText(g, "Welcome to", 1, 125, 100);
+		DrawText(g, "Welcome to", medium, 125, 100);
 		
 	}
 	
@@ -64,6 +64,13 @@ private Image arrowDown;
 		} else {
 			g.setFont(big);
 		}
+		
+		g.setColor(Color.white);
+		g.drawString(msg, posX, posY);
+	}
+	
+	public void DrawText(Graphics g, String msg, Font id, int posX, int posY) {
+		g.setFont(id);
 		
 		g.setColor(Color.white);
 		g.drawString(msg, posX, posY);
