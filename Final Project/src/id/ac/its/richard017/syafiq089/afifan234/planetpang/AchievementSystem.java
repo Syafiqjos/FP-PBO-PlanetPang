@@ -1,7 +1,9 @@
 package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
@@ -190,6 +192,56 @@ public class AchievementSystem implements Serializable{
 			{
 			    ex.printStackTrace();
 			}
+	}
+	
+	public boolean readFile(int type)
+	{
+		try 
+		{
+			FileInputStream fis = new FileInputStream("Data2.bin");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			AchievementSystem as = (AchievementSystem) ois.readObject();		
+			if (type==1)
+				return as.isBlindFoldPlaying;
+			if (type==2)
+				return as.isFullPerfect;
+			if (type==3)
+				return as.isPlayingOneHand;
+			if (type==4)
+				return as.isPlayingStanding;
+			if (type==5)
+				return as.isPlayingWithSmartphone;
+			if (type==6)
+				return as.isReaching10Combo;
+			if (type==7)
+				return as.isReaching30Combo;
+			if (type==8)
+				return as.isReaching50Combo;
+			if (type==9)
+				return as.isScore0;
+			if (type==10)
+				return as.isScoreRendah;
+			if (type==11)
+				return as.isScoreTengah;
+			if (type==12)
+				return as.isScoreTinggi;
+			if (type==13)
+				return as.isSwapping10Planet;
+			if (type==14)
+				return as.isSwapping15Planet;
+			if (type==15)
+				return as.isSwapping5Planet;
+		} catch (IOException ex) 
+			{
+			    ex.printStackTrace();
+			} 
+		  catch (ClassNotFoundException e) 
+			{
+			e.printStackTrace();
+			}
+
+		return false;
 	}
 	
 }
