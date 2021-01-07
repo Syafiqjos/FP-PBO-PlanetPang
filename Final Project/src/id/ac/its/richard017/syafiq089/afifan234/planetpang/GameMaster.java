@@ -33,6 +33,7 @@ public class GameMaster {
 		InitialPang();
 		
 		LoadHighscore();
+		LoadAchievement();
 	}
 	
 	private void InitialPang() {
@@ -154,6 +155,14 @@ public class GameMaster {
 
 	public void SaveHighscore() {
 		MainApp.highscoreSystem.saveHighScore(highscore);
+	}
+	
+	public void LoadAchievement() {
+		MainApp.achievementSystem = MainApp.achievementSystem.loadAchievement();
+	}
+
+	public void SaveAchievement() {
+		MainApp.achievementSystem.saveAchievement();
 	}
 	
 	public void UpdateHighscore() {

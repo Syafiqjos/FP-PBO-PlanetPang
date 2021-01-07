@@ -3,54 +3,53 @@ package id.ac.its.richard017.syafiq089.afifan234.planetpang;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class AchievementSystem implements Serializable{
 	
 	private boolean isReaching10Combo;
 	private boolean isReaching30Combo;
 	private boolean isReaching50Combo;
-	private boolean isSwapping5Planet;
-	private boolean isSwapping10Planet;
-	private boolean isSwapping15Planet;
-	private boolean isBlindFoldPlaying;
-	private boolean isScoreTinggi;
-	private boolean isScoreTengah;
-	private boolean isScoreRendah;
+	private boolean isSwapping5Planet; //1
+	private boolean isSwapping10Planet; //3
+	private boolean isSwapping15Planet; //5
+	//private boolean isBlindFoldPlaying;
+	private boolean isScoreTinggi; //Score > 5000
+	private boolean isScoreTengah; //Score > 3000
+	private boolean isScoreRendah; //Score > 1000
 	private boolean isScore0;
 	private boolean isFullPerfect;
-	private boolean isPlayingStanding;
-	private boolean isPlayingOneHand;
-	private boolean isPlayingWithSmartphone;
+	//private boolean isPlayingStanding;
+	//private boolean isPlayingOneHand;
+	//private boolean isPlayingWithSmartphone;
 	
 	public AchievementSystem()
 	{
-		this(false,false,false,false,false,false,false,false,false,false,false,false,false,false,false);
+		this(false,false,false,false,false,false,false,false,false,false,false);
 	}
 
 	public AchievementSystem(boolean isReaching10Combo, boolean isReaching30Combo, boolean isReaching50Combo,
 			boolean isSwapping5Planet, boolean isSwapping10Planet, boolean isSwapping15Planet,
-			boolean isBlindFoldPlaying, boolean isScoreTinggi, boolean isScoreTengah, boolean isScoreRendah,
-			boolean isScore0, boolean isFullPerfect, boolean isPlayingStanding, boolean isPlayingOneHand,
-			boolean isPlayingWithSmartphone) {
-		super();
+			boolean isScoreTinggi, boolean isScoreTengah, boolean isScoreRendah,
+			boolean isScore0, boolean isFullPerfect) {
+		//super();
 		this.isReaching10Combo = isReaching10Combo;
 		this.isReaching30Combo = isReaching30Combo;
 		this.isReaching50Combo = isReaching50Combo;
 		this.isSwapping5Planet = isSwapping5Planet;
 		this.isSwapping10Planet = isSwapping10Planet;
 		this.isSwapping15Planet = isSwapping15Planet;
-		this.isBlindFoldPlaying = isBlindFoldPlaying;
 		this.isScoreTinggi = isScoreTinggi;
 		this.isScoreTengah = isScoreTengah;
 		this.isScoreRendah = isScoreRendah;
 		this.isScore0 = isScore0;
 		this.isFullPerfect = isFullPerfect;
-		this.isPlayingStanding = isPlayingStanding;
-		this.isPlayingOneHand = isPlayingOneHand;
-		this.isPlayingWithSmartphone = isPlayingWithSmartphone;
 	}
 
 	//GETTERS AND SETTERS
@@ -102,14 +101,6 @@ public class AchievementSystem implements Serializable{
 				this.isSwapping15Planet = isSwapping15Planet;
 			}
 		
-			public boolean isBlindFoldPlaying() {
-				return isBlindFoldPlaying;
-			}
-		
-			public void setBlindFoldPlaying(boolean isBlindFoldPlaying) {
-				this.isBlindFoldPlaying = isBlindFoldPlaying;
-			}
-		
 			public boolean isScoreTinggi() {
 				return isScoreTinggi;
 			}
@@ -149,41 +140,27 @@ public class AchievementSystem implements Serializable{
 			public void setFullPerfect(boolean isFullPerfect) {
 				this.isFullPerfect = isFullPerfect;
 			}
-		
-			public boolean isPlayingStanding() {
-				return isPlayingStanding;
-			}
-		
-			public void setPlayingStanding(boolean isPlayingStanding) {
-				this.isPlayingStanding = isPlayingStanding;
-			}
-		
-			public boolean isPlayingOneHand() {
-				return isPlayingOneHand;
-			}
-		
-			public void setPlayingOneHand(boolean isPlayingOneHand) {
-				this.isPlayingOneHand = isPlayingOneHand;
-			}
-		
-			public boolean isPlayingWithSmartphone() {
-				return isPlayingWithSmartphone;
-			}
-		
-			public void setPlayingWithSmartphone(boolean isPlayingWithSmartphone) {
-				this.isPlayingWithSmartphone = isPlayingWithSmartphone;
-			}
+			
 	//END OF SETTER GETTER
 	
-	public void writeFile()
+	public void saveAchievement()
 	{
 		try 
 		{
-			FileOutputStream fos = new FileOutputStream("Data2.bin");
+			OutputStream fos = Files.newOutputStream(Paths.get("data2.bin"));
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
-			AchievementSystem as = new AchievementSystem();
+			/*
+			AchievementSystem as = new AchievementSystem(this.isReaching10Combo, this.isReaching30Combo, this.isReaching50Combo,
+					this.isSwapping5Planet, this.isSwapping10Planet, this.isSwapping15Planet,
+					this.isScoreTinggi, this.isScoreTengah, this.isScoreRendah,
+					this.isScore0, this.isFullPerfect);
+					*/
+			AchievementSystem as = this;
 
+			//as.printAchievement();
+			System.out.println("Save");
+			
 			oos.writeObject(as);
 			
 			oos.close();
@@ -194,44 +171,16 @@ public class AchievementSystem implements Serializable{
 			}
 	}
 	
-	public boolean readFile(int type)
+	public AchievementSystem loadAchievement()
 	{
 		try 
 		{
-			FileInputStream fis = new FileInputStream("Data2.bin");
+			InputStream fis = Files.newInputStream(Paths.get("data2.bin"));
 			ObjectInputStream ois = new ObjectInputStream(fis);
+
+			printAchievement();
 			
-			AchievementSystem as = (AchievementSystem) ois.readObject();		
-			if (type==1)
-				return as.isBlindFoldPlaying;
-			if (type==2)
-				return as.isFullPerfect;
-			if (type==3)
-				return as.isPlayingOneHand;
-			if (type==4)
-				return as.isPlayingStanding;
-			if (type==5)
-				return as.isPlayingWithSmartphone;
-			if (type==6)
-				return as.isReaching10Combo;
-			if (type==7)
-				return as.isReaching30Combo;
-			if (type==8)
-				return as.isReaching50Combo;
-			if (type==9)
-				return as.isScore0;
-			if (type==10)
-				return as.isScoreRendah;
-			if (type==11)
-				return as.isScoreTengah;
-			if (type==12)
-				return as.isScoreTinggi;
-			if (type==13)
-				return as.isSwapping10Planet;
-			if (type==14)
-				return as.isSwapping15Planet;
-			if (type==15)
-				return as.isSwapping5Planet;
+			return (AchievementSystem) ois.readObject();		
 		} catch (IOException ex) 
 			{
 			    ex.printStackTrace();
@@ -240,8 +189,75 @@ public class AchievementSystem implements Serializable{
 			{
 			e.printStackTrace();
 			}
-
-		return false;
+		
+		printAchievement();
+		
+		return this;
+	}
+	
+	public void printAchievement() {
+		System.out.println("Printing Achievement..");
+		System.out.println(isReaching10Combo);
+		System.out.println(isReaching30Combo);
+		System.out.println(isReaching50Combo);
+		
+		System.out.println(isSwapping5Planet);
+		System.out.println(isSwapping10Planet);
+		System.out.println(isSwapping15Planet);
+		
+		System.out.println(isScoreTinggi);
+		System.out.println(isScoreTengah);
+		System.out.println(isScoreRendah);
+		
+		System.out.println(isScore0);
+		
+		System.out.println(isFullPerfect);
+	}
+	
+	public void checkAchievement(boolean isSaved, int combo, int comboPerSecond, int score, boolean alreadyMiss)
+	{
+		if (!isReaching10Combo && combo >= 10) {
+			System.out.println("Unlock Combo 10");
+			isReaching10Combo = true;
+		} if (!isReaching30Combo && combo >= 30) {
+			isReaching30Combo = true;
+			System.out.println("Unlock Combo 30");
+		} if (!isReaching50Combo && combo >= 50) {
+			isReaching50Combo = true;
+			System.out.println("Unlock Combo 50");
+		}
+		
+		if (!isSwapping5Planet && comboPerSecond >= 1) {
+			isSwapping5Planet = true;
+			System.out.println("Unlock Swap 1");
+		} if (!isSwapping10Planet && comboPerSecond >= 3) {
+			isSwapping10Planet = true;
+			System.out.println("Unlock Swap 3");
+		} if (!isSwapping15Planet && comboPerSecond >= 5) {
+			isSwapping15Planet = true;
+			System.out.println("Unlock Swap 5");
+		}
+		
+		if (!isScoreRendah && score >= 1000) {
+			isScoreRendah = true;
+			System.out.println("Unlock Score 1000");
+		} if (!isScoreTengah && score >= 3000) {
+			isScoreTengah = true;
+			System.out.println("Unlock Score 3000");
+		} if (!isScoreTinggi && score >= 5000) {
+			isScoreTinggi = true;
+			System.out.println("Unlock Score 5000");
+		}
+		
+		if (!isScore0 && isSaved && score == 0) {
+			isScore0 = true;
+			System.out.println("Unlock Score 0");
+		}
+		
+		if (!isFullPerfect && isSaved && !alreadyMiss) {
+			isFullPerfect = true;
+			System.out.println("Unlock Perfect");
+		}
 	}
 	
 }

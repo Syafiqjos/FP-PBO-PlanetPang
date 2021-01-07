@@ -9,11 +9,13 @@ public class MainApp extends JFrame {
 	public static SceneManager sceneManager;
 	public static AssetManager assetManager;
 	public static HighscoreSystem highscoreSystem;
+	public static AchievementSystem achievementSystem;
 	
 	public MainApp() {
 		mainApp = this;
 		sceneManager = new SceneManager();
 		highscoreSystem = new HighscoreSystem();
+		achievementSystem = new AchievementSystem();
 		AssetManager.LoadAssets();		
 		
         initUI();

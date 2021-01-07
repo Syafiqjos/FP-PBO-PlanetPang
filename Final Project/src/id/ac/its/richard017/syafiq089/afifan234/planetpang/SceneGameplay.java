@@ -32,7 +32,7 @@ public class SceneGameplay extends Scene {
 	private final int comboPosY = 420;
 	
 	private final int FPS = 60;
-	private int gameplayCounter = FPS * 60;
+	private int gameplayCounter = FPS * 5;
 	private int errorCounter = 0;
 	
 	private boolean isGameOver = false;
@@ -47,6 +47,8 @@ public class SceneGameplay extends Scene {
 	private final int errorPosY = 320;
 	
 	private boolean highscoreSaved = false;
+	private boolean alreadyMiss = false;
+	private int comboPerSecond = 0;
 	
 	private Image backgroundSpace;
 	
@@ -69,6 +71,7 @@ public class SceneGameplay extends Scene {
 		
 		gameMaster = new GameMaster();
 		gameMaster.LoadHighscore();
+		gameMaster.LoadAchievement();
 	}
 	
 	@Override
@@ -88,6 +91,8 @@ public class SceneGameplay extends Scene {
 			}
 		}
 		
+		CheckAchievement();
+		
 		Animating();
 		if (!isGameOver) {
 			DrawUI(g);
@@ -105,6 +110,9 @@ public class SceneGameplay extends Scene {
 		if (!highscoreSaved) {
 			gameMaster.UpdateHighscore();
 			highscoreSaved = true;
+			
+			CheckAchievement();
+			gameMaster.SaveAchievement();
 		}
 	
 		if (gameOverCounter > 0) {
@@ -155,6 +163,8 @@ public class SceneGameplay extends Scene {
 			g.drawString(String.format("Time : %d",gameplayCounter / FPS + 1), scorePosX, scorePosY + 64);
 			
 			gameplayCounter -= 1;
+			
+			comboPerSecond = 0;
 		} else {
 			isGameOver = true;
 		}
@@ -216,6 +226,10 @@ public class SceneGameplay extends Scene {
 		errorCounter = ERROR_MAX;
 	}
 	
+	private void CheckAchievement() {
+		MainApp.achievementSystem.checkAchievement(highscoreSaved, gameMaster.GetCombo(), comboPerSecond, gameMaster.GetScore(), alreadyMiss);
+	}
+	
 	private class TAdapter extends KeyAdapter {
 		private boolean left = false;
 		private boolean right = false;
@@ -236,15 +250,19 @@ public class SceneGameplay extends Scene {
 		        if (key == KeyEvent.VK_LEFT && !left) {
 		        	if (gameMaster.CheckPang(0)) {
 		        		MoveLeft();
+		        		comboPerSecond++;
 		        	} else {
 		        		SetError();
+		        		alreadyMiss = true;
 		        	}
 		        	left = true;
 		        } else if (key == KeyEvent.VK_RIGHT && !right) {
 		        	if (gameMaster.CheckPang(1)) {
 		        		MoveRight();
+		        		comboPerSecond++;
 		        	} else {
 		        		SetError();
+		        		alreadyMiss = true;
 		        	}
 		        	right = true;
 		        }
