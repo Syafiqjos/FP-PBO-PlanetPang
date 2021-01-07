@@ -16,7 +16,7 @@ public class SceneManager {
 	}
 	
 	public static void LoadMainMenuScene() {
-		currentScene = new SceneMainMenu();
+		currentScene = new SceneAchievement();
 		MainApp.mainApp.ResetUI();
 	}
 	
