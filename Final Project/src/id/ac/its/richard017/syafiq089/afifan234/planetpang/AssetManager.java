@@ -64,6 +64,10 @@ public class AssetManager {
 		HIGHSCORE_HOVER = loadImage("sprite/Button_Start_MouseEnter.png");
 		HIGHSCORE_PRESSED = loadImage("sprite/Button_Start_MouseClick.png");
 		
+		BUTTON_ACHIEVEMENT = loadImage("sprite/Button_Achievement_Normal.png");
+		ACHIEVEMENT_HOVER = loadImage("sprite/Button_Achievement_MouseEnter.png");
+		ACHIEVEMENT_PRESSED = loadImage("sprite/Button_Achievement_MouseClick.png");
+		
 		ARROW_UP = loadImage("sprite/Arrow_Up.png");
 		ARROW_DOWN = loadImage("sprite/Arrow_Down.png");
 		ARROW_LEFT = loadImage("sprite/Arrow_Left.png");

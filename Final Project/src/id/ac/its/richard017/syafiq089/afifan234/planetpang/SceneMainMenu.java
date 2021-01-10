@@ -46,17 +46,17 @@ public class SceneMainMenu extends Scene {
 	@Override
 	public void drawObjects(Graphics g) {
 		
-		Button start = new Button (AssetManager.BUTTON_START, AssetManager.START_HOVER, AssetManager.START_PRESSED, 183,235);
+		Button start = new Button (AssetManager.BUTTON_START, AssetManager.START_HOVER, AssetManager.START_PRESSED, 183,240);
 		Button highscore = new Button (AssetManager.BUTTON_HIGHSCORE, AssetManager.HIGHSCORE_HOVER, AssetManager.HIGHSCORE_PRESSED, 183,315);
-		Button achievement = new Button ();
+		Button achievement = new Button (AssetManager.BUTTON_ACHIEVEMENT, AssetManager.ACHIEVEMENT_HOVER, AssetManager.ACHIEVEMENT_PRESSED, 179,393);
 		Button credits = new Button (AssetManager.BUTTON_CREDITS, AssetManager.CREDITS_HOVER, AssetManager.CREDITS_PRESSED, 183,475);
-		Button exit = new Button (AssetManager.BUTTON_EXIT, AssetManager.EXIT_HOVER, AssetManager.EXIT_PRESSED, 183,555);
+		Button exit = new Button (AssetManager.BUTTON_EXIT, AssetManager.EXIT_HOVER, AssetManager.EXIT_PRESSED, 183,550);
 		
 		g.drawImage(backgroundMenu, 0, 0, this);
 		
 		g.drawImage(start.getImage(), start.getPosX(), start.getPosY(), this);
 		g.drawImage(highscore.getImage(), highscore.getPosX(), highscore.getPosY(), this);
-	//	g.drawImage(achievement.getImage(), achievement.getPosX(), achievement.getPosY(), this);
+		g.drawImage(achievement.getImage(), achievement.getPosX(), achievement.getPosY(), this);
 		g.drawImage(credits.getImage(), credits.getPosX(), credits.getPosY(), this);
 		g.drawImage(exit.getImage(), exit.getPosX(), exit.getPosY(), this);			
 		
