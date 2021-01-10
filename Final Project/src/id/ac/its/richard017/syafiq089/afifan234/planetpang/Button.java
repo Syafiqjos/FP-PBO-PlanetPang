@@ -21,17 +21,17 @@ public class Button {
 		this.posY = posY;	
 	}
 	
-	public void DrawButton(Graphics g, Button b) {
-		g.drawImage(b.image, b.posX, b.posY, (ImageObserver) this);
-	}
-	
-	public void HoverStatus(Graphics g, Button b) {
-		g.drawImage(b.hoverImage, b.posX, b.posY, (ImageObserver) this);
-	}
-	
-	public void ButtonPressed(Graphics g, Button b) {
-		g.drawImage(b.imagePressed, b.posX, b.posY, (ImageObserver) this);
-	}
+//	public void DrawButton(Graphics g, Button b) {
+//		g.drawImage(b.image, b.posX, b.posY, (ImageObserver) this);
+//	}
+//	
+//	public void HoverStatus(Graphics g, Button b) {
+//		g.drawImage(b.hoverImage, b.posX, b.posY, (ImageObserver) this);
+//	}
+//	
+//	public void ButtonPressed(Graphics g, Button b) {
+//		g.drawImage(b.imagePressed, b.posX, b.posY, (ImageObserver) this);
+//	}
 	
 	//image
 	public Image getImage() {

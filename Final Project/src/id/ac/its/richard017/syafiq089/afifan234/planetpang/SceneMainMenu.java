@@ -12,15 +12,16 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 public class SceneMainMenu extends Scene {
-private Image backgroundMenu;
-private Image buttonStart;
-private Image buttonHighscore;
-private Image buttonExit;
-private Image buttonCredits;
-private Image arrowUp;
-private Image arrowLeft;
-private Image arrowRight;
-private Image arrowDown;
+	
+	private Image backgroundMenu;
+	//private Image buttonStart;
+	//private Image buttonHighscore;
+	//private Image buttonExit;
+	//private Image buttonCredits;
+	//private Image arrowUp;
+	//private Image arrowLeft;
+	//private Image arrowRight;
+	//private Image arrowDown;
 
 	private final Font small = new Font("AgencyFB", Font.BOLD, 16);
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
@@ -30,28 +31,43 @@ private Image arrowDown;
 		super(480, 640);
 		
 		backgroundMenu = AssetManager.BACKGROUND_MENU; 
-		buttonStart = AssetManager.BUTTON_START;
-		buttonExit = AssetManager.BUTTON_EXIT;
-		buttonHighscore = AssetManager.BUTTON_HIGHSCORE;
-		buttonCredits = AssetManager.BUTTON_CREDITS;
-		arrowUp = AssetManager.ARROW_UP;
-		arrowDown = AssetManager.ARROW_DOWN;
-		arrowLeft = AssetManager.ARROW_LEFT;
-		arrowRight = AssetManager.ARROW_RIGHT;
+//		buttonStart = AssetManager.BUTTON_START;
+//		buttonExit = AssetManager.BUTTON_EXIT;
+//		buttonHighscore = AssetManager.BUTTON_HIGHSCORE;
+//		buttonCredits = AssetManager.BUTTON_CREDITS;
+//		arrowUp = AssetManager.ARROW_UP;
+//		arrowDown = AssetManager.ARROW_DOWN;
+//		arrowLeft = AssetManager.ARROW_LEFT;
+//		arrowRight = AssetManager.ARROW_RIGHT;		
+		
 		addKeyListener(new TAdapter());
 	}
 	
 	@Override
 	public void drawObjects(Graphics g) {
+		
+		Button start = new Button (AssetManager.BUTTON_START, AssetManager.START_HOVER, AssetManager.START_PRESSED, 183,235);
+		Button highscore = new Button (AssetManager.BUTTON_HIGHSCORE, AssetManager.HIGHSCORE_HOVER, AssetManager.HIGHSCORE_PRESSED, 183,315);
+		Button achievement = new Button ();
+		Button credits = new Button (AssetManager.BUTTON_CREDITS, AssetManager.CREDITS_HOVER, AssetManager.CREDITS_PRESSED, 183,475);
+		Button exit = new Button (AssetManager.BUTTON_EXIT, AssetManager.EXIT_HOVER, AssetManager.EXIT_PRESSED, 183,555);
+		
 		g.drawImage(backgroundMenu, 0, 0, this);
-		g.drawImage(arrowUp,232,215,this);
-		g.drawImage(buttonStart,183,235,this);
-		g.drawImage(arrowLeft,0,399,this);
-		g.drawImage(buttonCredits,15,383,this);
-		g.drawImage(arrowRight,454,399,this);
-		g.drawImage(buttonHighscore,345,383,this);
-		g.drawImage(arrowDown,232,616,this);
-		g.drawImage(buttonExit,183,560,this);
+		
+		g.drawImage(start.getImage(), start.getPosX(), start.getPosY(), this);
+		g.drawImage(highscore.getImage(), highscore.getPosX(), highscore.getPosY(), this);
+	//	g.drawImage(achievement.getImage(), achievement.getPosX(), achievement.getPosY(), this);
+		g.drawImage(credits.getImage(), credits.getPosX(), credits.getPosY(), this);
+		g.drawImage(exit.getImage(), exit.getPosX(), exit.getPosY(), this);			
+		
+//		g.drawImage(arrowUp,232,215,this);
+//		g.drawImage(buttonStart,183,235,this);
+//		g.drawImage(arrowLeft,0,399,this);
+//		g.drawImage(buttonCredits,15,383,this);
+//		g.drawImage(arrowRight,454,399,this);
+//		g.drawImage(buttonHighscore,345,383,this);
+//		g.drawImage(arrowDown,232,616,this);
+//		g.drawImage(buttonExit,183,560,this);
 		DrawText(g, "Welcome to", medium, 125, 100);
 		
 	}
