@@ -14,11 +14,11 @@ import java.util.Queue;
 public class SceneMainMenu extends Scene {
 	
 	private Image backgroundMenu;
-	private Button start = new Button (AssetManager.BUTTON_START, AssetManager.START_HOVER, AssetManager.BUTTON_START, 183,240);
-	private Button highscore = new Button (AssetManager.BUTTON_HIGHSCORE, AssetManager.HIGHSCORE_HOVER, AssetManager.BUTTON_HIGHSCORE, 183,315);
-	private Button achievement = new Button (AssetManager.BUTTON_ACHIEVEMENT, AssetManager.ACHIEVEMENT_HOVER, AssetManager.BUTTON_ACHIEVEMENT, 179,393);
-	private Button credits = new Button (AssetManager.BUTTON_CREDITS, AssetManager.CREDITS_HOVER, AssetManager.BUTTON_CREDITS, 183,475);
-	private Button exit = new Button (AssetManager.BUTTON_EXIT, AssetManager.EXIT_HOVER, AssetManager.BUTTON_EXIT, 183,550);
+	private Button start = new Button (AssetManager.BUTTON_START, AssetManager.START_HOVER, AssetManager.START_PRESSED, 183,240);
+	private Button highscore = new Button (AssetManager.BUTTON_HIGHSCORE, AssetManager.HIGHSCORE_HOVER, AssetManager.HIGHSCORE_PRESSED, 183,315);
+	private Button achievement = new Button (AssetManager.BUTTON_ACHIEVEMENT, AssetManager.ACHIEVEMENT_HOVER, AssetManager.ACHIEVEMENT_PRESSED, 179,393);
+	private Button credits = new Button (AssetManager.BUTTON_CREDITS, AssetManager.CREDITS_HOVER, AssetManager.CREDITS_PRESSED, 183,475);
+	private Button exit = new Button (AssetManager.BUTTON_EXIT, AssetManager.EXIT_HOVER, AssetManager.EXIT_PRESSED, 183,550);
 
 	private final Font small = new Font("AgencyFB", Font.BOLD, 16);
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
@@ -30,14 +30,6 @@ public class SceneMainMenu extends Scene {
 		super(480, 640);
 		
 		backgroundMenu = AssetManager.BACKGROUND_MENU; 
-//		buttonStart = AssetManager.BUTTON_START;
-//		buttonExit = AssetManager.BUTTON_EXIT;
-//		buttonHighscore = AssetManager.BUTTON_HIGHSCORE;
-//		buttonCredits = AssetManager.BUTTON_CREDITS;
-//		arrowUp = AssetManager.ARROW_UP;
-//		arrowDown = AssetManager.ARROW_DOWN;
-//		arrowLeft = AssetManager.ARROW_LEFT;
-//		arrowRight = AssetManager.ARROW_RIGHT;		
 		
 		addKeyListener(new TAdapter());
 		
@@ -48,20 +40,12 @@ public class SceneMainMenu extends Scene {
 	public void drawObjects(Graphics g) {		
 		g.drawImage(backgroundMenu, 0, 0, this);
 		
-		g.drawImage(start.getImage(), start.getPosX(), start.getPosY(), this);
-		g.drawImage(highscore.getImage(), highscore.getPosX(), highscore.getPosY(), this);
-		g.drawImage(achievement.getImage(), achievement.getPosX(), achievement.getPosY(), this);
-		g.drawImage(credits.getImage(), credits.getPosX(), credits.getPosY(), this);
-		g.drawImage(exit.getImage(), exit.getPosX(), exit.getPosY(), this);			
-		
-//		g.drawImage(arrowUp,232,215,this);
-//		g.drawImage(buttonStart,183,235,this);
-//		g.drawImage(arrowLeft,0,399,this);
-//		g.drawImage(buttonCredits,15,383,this);
-//		g.drawImage(arrowRight,454,399,this);
-//		g.drawImage(buttonHighscore,345,383,this);
-//		g.drawImage(arrowDown,232,616,this);
-//		g.drawImage(buttonExit,183,560,this);
+		g.drawImage(start.getCurrentImage(), start.getPosX(), start.getPosY(), this);
+		g.drawImage(highscore.getCurrentImage(), highscore.getPosX(), highscore.getPosY(), this);
+		g.drawImage(achievement.getCurrentImage(), achievement.getPosX(), achievement.getPosY(), this);
+		g.drawImage(credits.getCurrentImage(), credits.getPosX(), credits.getPosY(), this);
+		g.drawImage(exit.getCurrentImage(), exit.getPosX(), exit.getPosY(), this);			
+
 		DrawText(g, "Welcome to", medium, 125, 100);
 		
 	}
@@ -112,9 +96,9 @@ public class SceneMainMenu extends Scene {
 	
 	public void SelectButton(Button button, boolean isHover) {
 		if (isHover) {
-			button.setImage(button.getHoverImage());
+			button.setCurrentImage(button.getHoverImage());
 		} else {
-			button.setImage(button.getImagePressed());
+			button.setCurrentImage(button.getImage());
 		}
 	}
 	

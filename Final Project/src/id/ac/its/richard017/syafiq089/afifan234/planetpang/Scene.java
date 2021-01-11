@@ -30,10 +30,7 @@ public class Scene extends JPanel implements ActionListener, IScene {
     }
 
     private void initBoard() {        
-        MouseHandler tempHandler = new MouseHandler(B_WIDTH, B_HEIGHT);
         
-        addMouseMotionListener(tempHandler);
-        addMouseListener(tempHandler);
         setFocusable(true);
         setBackground(Color.BLACK);
         ingame = true;

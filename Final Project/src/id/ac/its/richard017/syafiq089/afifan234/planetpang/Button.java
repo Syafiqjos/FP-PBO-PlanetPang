@@ -8,31 +8,25 @@ public class Button {
 	private Image image;
 	private Image hoverImage;
 	private Image imagePressed;
+	private Image currentImage;
 	private int posX, posY;
-	private boolean hover, pressed;
-	
-	public Button () {}
 	
 	public Button(Image image, Image hoverImage, Image imagePressed, int posX, int posY) {
 		this.image = image;
 		this.hoverImage = hoverImage;
 		this.imagePressed = imagePressed;
+		this.setCurrentImage(this.image);
 		this.posX = posX;
 		this.posY = posY;	
 	}
-	
-//	public void DrawButton(Graphics g, Button b) {
-//		g.drawImage(b.image, b.posX, b.posY, (ImageObserver) this);
-//	}
-//	
-//	public void HoverStatus(Graphics g, Button b) {
-//		g.drawImage(b.hoverImage, b.posX, b.posY, (ImageObserver) this);
-//	}
-//	
-//	public void ButtonPressed(Graphics g, Button b) {
-//		g.drawImage(b.imagePressed, b.posX, b.posY, (ImageObserver) this);
-//	}
-	
+
+	//Current Image
+	public Image getCurrentImage() {
+		return currentImage;
+	}
+	public void setCurrentImage(Image currentImage) {
+		this.currentImage = currentImage;
+	}
 	//image
 	public Image getImage() {
 		return image;
@@ -67,20 +61,6 @@ public class Button {
 	}
 	public void setPosY(int posY) {
 		this.posY = posY;
-	}
-	//hover
-	public boolean isHover() {
-		return hover;
-	}
-	public void setHover(boolean hover) {
-		this.hover = hover;
-	}
-	//pressed
-	public boolean isPressed() {
-		return pressed;
-	}
-	public void setPressed(boolean pressed) {
-		this.pressed = pressed;
 	}
 
 }
