@@ -26,8 +26,8 @@ public class SceneManager {
 		MainApp.mainApp.ResetUI();
 	}
 	
-	public static void LoadHowToPlayScene() {
-		//currentScene = new SceneGameplay();
+	public static void LoadAchievementScene() {
+		currentScene = new SceneAchievement();
 		MainApp.mainApp.ResetUI();
 	}
 	

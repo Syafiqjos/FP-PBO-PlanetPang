@@ -53,16 +53,16 @@ public class AssetManager {
 		START_PRESSED = loadImage("sprite/Button_Start_MouseClick.png");
 		
 		BUTTON_CREDITS = loadImage("sprite/Button_Credits_Normal.png");
-		CREDITS_HOVER = loadImage("sprite/Button_Start_MouseEnter.png");
-		CREDITS_PRESSED = loadImage("sprite/Button_Start_MouseClick.png");
+		CREDITS_HOVER = loadImage("sprite/Button_Credits_MouseEnter.png");
+		CREDITS_PRESSED = loadImage("sprite/Button_Credits_MouseClick.png");
 		
 		BUTTON_EXIT = loadImage("sprite/Button_Exit_Normal.png");
-		EXIT_HOVER = loadImage("sprite/Button_Start_MouseEnter.png");
-		EXIT_PRESSED = loadImage("sprite/Button_Start_MouseClick.png");
+		EXIT_HOVER = loadImage("sprite/Button_Exit_MouseEnter.png");
+		EXIT_PRESSED = loadImage("sprite/Button_Exit_MouseClick.png");
 		
 		BUTTON_HIGHSCORE = loadImage("sprite/Button_Highscore_Normal.png");
-		HIGHSCORE_HOVER = loadImage("sprite/Button_Start_MouseEnter.png");
-		HIGHSCORE_PRESSED = loadImage("sprite/Button_Start_MouseClick.png");
+		HIGHSCORE_HOVER = loadImage("sprite/Button_Highscore_MouseEnter.png");
+		HIGHSCORE_PRESSED = loadImage("sprite/Button_Highscore_MouseClick.png");
 		
 		BUTTON_ACHIEVEMENT = loadImage("sprite/Button_Achievement_Normal.png");
 		ACHIEVEMENT_HOVER = loadImage("sprite/Button_Achievement_MouseEnter.png");

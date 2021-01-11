@@ -20,6 +20,13 @@ public class MainApp extends JFrame {
 		
         initUI();
         SceneManager.LoadMainMenuScene();
+        
+        //RESET
+        //achievementSystem.saveAchievement();
+        //highscoreSystem.saveHighScore(0);
+        
+        achievementSystem = achievementSystem.loadAchievement();
+        highscoreSystem.loadHighScore();
     }
     
     private void initUI() {

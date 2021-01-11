@@ -13,13 +13,14 @@ private Image backgroundSpace;
 	private final Font small = new Font("AgencyFB", Font.BOLD, 16);
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
 	private final Font big = new Font("AgencyFB", Font.BOLD, 54);
-	AchievementSystem as = new AchievementSystem();
+	AchievementSystem as;
 	
 	public SceneAchievement() {
 		super(480, 640);
 		
 		backgroundSpace = AssetManager.BACKGROUND_SPACE; 
-		as.loadAchievement();
+		//as.loadAchievement();
+		as = MainApp.achievementSystem;
 		
 		addKeyListener(new TAdapter());
 	}
@@ -56,19 +57,19 @@ private Image backgroundSpace;
 			g.setColor(Color.WHITE);
 		else
 			g.setColor(Color.LIGHT_GRAY);
-		DrawText(g, "- Swapping 5 Planet Within 5 Seconds",0,20,360);
+		DrawText(g, "- Swapping 1 Planet Within 1 Second",0,20,360);
 
 		if (as.isSwapping10Planet() == true)
 			g.setColor(Color.WHITE);
 		else
 			g.setColor(Color.LIGHT_GRAY);
-		DrawText(g, "- Swapping 10 Planet Within 5 Seconds",0,20,390);
+		DrawText(g, "- Swapping 3 Planet Within 1 Second",0,20,390);
 		
 		if (as.isSwapping15Planet() == true)
 			g.setColor(Color.WHITE);
 		else
 			g.setColor(Color.LIGHT_GRAY);
-		DrawText(g, "- Swapping 15 Planet Within 5 Seconds",0,20,420);
+		DrawText(g, "- Swapping 5 Planet Within 1 Second",0,20,420);
 		
 		if (as.isScoreTinggi() == true)
 			g.setColor(Color.WHITE);
@@ -99,6 +100,9 @@ private Image backgroundSpace;
 		else
 			g.setColor(Color.LIGHT_GRAY);
 		DrawText(g, "- Full Perfect Combo",0,20,570);
+		
+		g.setColor(Color.WHITE);
+		DrawText(g, "[ Press Backspace to Main Menu ]", 0, 20, 620);
 		
 	}
 	
@@ -135,10 +139,7 @@ private Image backgroundSpace;
 		@Override
 	    public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			if (!back && (key == KeyEvent.VK_ENTER)) {
-				SceneManager.LoadGameplayScene();
-	        	back = true;
-	        } else if (!back && (key == KeyEvent.VK_BACK_SPACE)) {
+			if (!back && (key == KeyEvent.VK_BACK_SPACE)) {
 				SceneManager.LoadMainMenuScene();
 	        	back = true;
 	        }

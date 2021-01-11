@@ -14,18 +14,17 @@ import java.util.Queue;
 public class SceneMainMenu extends Scene {
 	
 	private Image backgroundMenu;
-	//private Image buttonStart;
-	//private Image buttonHighscore;
-	//private Image buttonExit;
-	//private Image buttonCredits;
-	//private Image arrowUp;
-	//private Image arrowLeft;
-	//private Image arrowRight;
-	//private Image arrowDown;
+	private Button start = new Button (AssetManager.BUTTON_START, AssetManager.START_HOVER, AssetManager.BUTTON_START, 183,240);
+	private Button highscore = new Button (AssetManager.BUTTON_HIGHSCORE, AssetManager.HIGHSCORE_HOVER, AssetManager.BUTTON_HIGHSCORE, 183,315);
+	private Button achievement = new Button (AssetManager.BUTTON_ACHIEVEMENT, AssetManager.ACHIEVEMENT_HOVER, AssetManager.BUTTON_ACHIEVEMENT, 179,393);
+	private Button credits = new Button (AssetManager.BUTTON_CREDITS, AssetManager.CREDITS_HOVER, AssetManager.BUTTON_CREDITS, 183,475);
+	private Button exit = new Button (AssetManager.BUTTON_EXIT, AssetManager.EXIT_HOVER, AssetManager.BUTTON_EXIT, 183,550);
 
 	private final Font small = new Font("AgencyFB", Font.BOLD, 16);
 	private final Font medium = new Font("AgencyFB", Font.BOLD, 42);
 	private final Font big = new Font("AgencyFB", Font.BOLD, 54);
+
+	private int selectionMenuIndex = 0;
 	
 	public SceneMainMenu() {
 		super(480, 640);
@@ -41,17 +40,12 @@ public class SceneMainMenu extends Scene {
 //		arrowRight = AssetManager.ARROW_RIGHT;		
 		
 		addKeyListener(new TAdapter());
+		
+		SelectMenu();
 	}
 	
 	@Override
-	public void drawObjects(Graphics g) {
-		
-		Button start = new Button (AssetManager.BUTTON_START, AssetManager.START_HOVER, AssetManager.START_PRESSED, 183,240);
-		Button highscore = new Button (AssetManager.BUTTON_HIGHSCORE, AssetManager.HIGHSCORE_HOVER, AssetManager.HIGHSCORE_PRESSED, 183,315);
-		Button achievement = new Button (AssetManager.BUTTON_ACHIEVEMENT, AssetManager.ACHIEVEMENT_HOVER, AssetManager.ACHIEVEMENT_PRESSED, 179,393);
-		Button credits = new Button (AssetManager.BUTTON_CREDITS, AssetManager.CREDITS_HOVER, AssetManager.CREDITS_PRESSED, 183,475);
-		Button exit = new Button (AssetManager.BUTTON_EXIT, AssetManager.EXIT_HOVER, AssetManager.EXIT_PRESSED, 183,550);
-		
+	public void drawObjects(Graphics g) {		
 		g.drawImage(backgroundMenu, 0, 0, this);
 		
 		g.drawImage(start.getImage(), start.getPosX(), start.getPosY(), this);
@@ -92,13 +86,45 @@ public class SceneMainMenu extends Scene {
 		g.drawString(msg, posX, posY);
 	}
 	
+	public void PrevMenu() {
+		selectionMenuIndex--;
+		if (selectionMenuIndex < 0) {
+			selectionMenuIndex = 0;
+		}
+		SelectMenu();
+	}
+	
+	public void NextMenu() {
+		selectionMenuIndex++;
+		if (selectionMenuIndex > 4) {
+			selectionMenuIndex = 4;
+		}
+		SelectMenu();
+	}
+	
+	public void SelectMenu() {
+		SelectButton(start, selectionMenuIndex == 0);
+		SelectButton(highscore, selectionMenuIndex == 1);
+		SelectButton(achievement, selectionMenuIndex == 2);
+		SelectButton(credits, selectionMenuIndex == 3);
+		SelectButton(exit, selectionMenuIndex == 4);
+	}
+	
+	public void SelectButton(Button button, boolean isHover) {
+		if (isHover) {
+			button.setImage(button.getHoverImage());
+		} else {
+			button.setImage(button.getImagePressed());
+		}
+	}
+	
 	private class TAdapter extends KeyAdapter {
 		private boolean back = false;
 		
 		@Override
 	    public void keyReleased(KeyEvent e) {
 			int key = e.getKeyCode();
-	        if (key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_UP) {
 	        	back = false;
 	        }
 	    }
@@ -106,18 +132,27 @@ public class SceneMainMenu extends Scene {
 		@Override
 	    public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			if (!back && (key == KeyEvent.VK_UP)) {
-				SceneManager.LoadGameplayScene();
+			if (!back && (key == KeyEvent.VK_DOWN)) {
+				NextMenu();
 	        	back = true;
-	        } else if (!back && (key == KeyEvent.VK_RIGHT)) {
-				SceneManager.LoadHighscoreScene();
-	        	back = true;
-	        } else if (!back && (key == KeyEvent.VK_DOWN)) {
-				System.exit(0);
-	        } else if (!back && (key == KeyEvent.VK_LEFT)) {
-	        	SceneManager.LoadCreditsScene();
+	        } else if (!back && (key == KeyEvent.VK_UP)) {
+				PrevMenu();
 	        	back = true;
 	        }
+			
+			if (!back && (key == KeyEvent.VK_ENTER)) {
+				if (selectionMenuIndex == 0) {
+					SceneManager.LoadGameplayScene();
+				} else if (selectionMenuIndex == 1) {
+					SceneManager.LoadHighscoreScene();
+				} else if (selectionMenuIndex == 2) {
+					SceneManager.LoadAchievementScene();
+				} else if (selectionMenuIndex == 3) {
+					SceneManager.LoadCreditsScene();
+				} else if (selectionMenuIndex == 4) {
+					System.exit(0);
+				}
+			}
 	    }
 	}
 }

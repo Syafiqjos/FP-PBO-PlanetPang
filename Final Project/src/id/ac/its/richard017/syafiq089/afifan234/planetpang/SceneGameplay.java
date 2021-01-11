@@ -32,7 +32,7 @@ public class SceneGameplay extends Scene {
 	private final int comboPosY = 420;
 	
 	private final int FPS = 60;
-	private int gameplayCounter = FPS * 5;
+	private int gameplayCounter = FPS * 60;
 	private int errorCounter = 0;
 	
 	private boolean isGameOver = false;
@@ -164,7 +164,9 @@ public class SceneGameplay extends Scene {
 			
 			gameplayCounter -= 1;
 			
-			comboPerSecond = 0;
+			if (gameplayCounter % FPS == 0) {
+				comboPerSecond = 0;
+			}
 		} else {
 			isGameOver = true;
 		}
@@ -251,6 +253,7 @@ public class SceneGameplay extends Scene {
 		        	if (gameMaster.CheckPang(0)) {
 		        		MoveLeft();
 		        		comboPerSecond++;
+		        		System.out.println(comboPerSecond);
 		        	} else {
 		        		SetError();
 		        		alreadyMiss = true;
@@ -260,19 +263,12 @@ public class SceneGameplay extends Scene {
 		        	if (gameMaster.CheckPang(1)) {
 		        		MoveRight();
 		        		comboPerSecond++;
+		        		System.out.println(comboPerSecond);
 		        	} else {
 		        		SetError();
 		        		alreadyMiss = true;
 		        	}
 		        	right = true;
-		        }
-		        
-		        if (key == KeyEvent.VK_UP) {
-		        	GameMaster.COUNT += 1;
-		        }
-		        
-		        if (key == KeyEvent.VK_DOWN) {
-		        	GameMaster.COUNT -= 1;
 		        }
 			}
 	    }
