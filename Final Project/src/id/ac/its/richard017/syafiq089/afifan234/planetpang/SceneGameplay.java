@@ -170,6 +170,14 @@ public class SceneGameplay extends Scene {
 		} else {
 			isGameOver = true;
 		}
+		
+		//Image Control		
+		g.drawImage(AssetManager.PLANET_LEFT, 24, 560, this);
+		g.drawImage(AssetManager.PLANET_RIGHT, 400, 560, this);
+		
+		//Arrow Control
+		g.drawImage(AssetManager.ARROW_LEFT, 36, 600, this);
+		g.drawImage(AssetManager.ARROW_RIGHT, 420, 600, this);
 	}
 	
 	@Override
@@ -269,6 +277,10 @@ public class SceneGameplay extends Scene {
 		        		alreadyMiss = true;
 		        	}
 		        	right = true;
+		        }
+		        
+		        else if (key == KeyEvent.VK_BACK_SPACE) {
+		        	SceneManager.LoadMainMenuScene();
 		        }
 			}
 	    }
