@@ -20,7 +20,10 @@ Planet pang adalah sebuah game fast-paced yang melatih kecepatan berpikir serta 
 
 ![PlanetPang - Achievement](/Images/PlanetPangAchievement.png)
 
-Berikut merupakan video trailer dan penjelasan dari kami berdasarkan commit dan feature yang kami kerjakan.
+Berikut merupakan video trailer Planet Pang.
+[TRAILER PLANET PANG - YOUTUBE](https://www.youtube.com/watch?v=AUuyBHIhfu0)
+
+Berikut merupakan penjelasan dari kami berdasarkan commit dan feature yang kami kerjakan.
 [PRESENTASI VIDEO - YOUTUBE](https://youtu.be/9oP2mYigOMM)
 
 Pemain akan disuguhkan oleh dua planet imut yang memiliki perlakuan berbeda. Planet tersebut adalah planet biru dan juga planet orange. Pemain diharuskan memilih dan membedakan planet yang ada dengan menggunakan anak panah pada keyboard, yaitu tombol arrow kiri dan tombol arrow kanan.
