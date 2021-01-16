@@ -78,22 +78,58 @@ Meskipun agak tidak jelas karena mungkin gambar terlalu banyak sehingga hanya mu
 ## C. Penjelasan List Class dan Interface Planet Pang
 ## Class
 ### 1. MainApp
+Merupakan badan utama dan letak fungsi static `main()` yang ada pada game kami. Meskipun begitu kami juga menggunakan prinsip singleton pattern sehingga class `MainApp` memiliki beberapa static method dan static field yang digunakan agar class lain dapat menggunakannya tanpa menginisiasi class `MainApp` yang baru.
+
 ### 2. SceneManager
+Merupakan class static yang memiliki fungsi untuk mengeload class `Scene` dimanapun kita berada (di scene manapun kita berada). Hal ini digunakan untuk mempermudah perubahan level atau scene kami. Di inisialisasi pada `mainApp` yang juga menggunakan prinsip singleton pattern.
+
 ### 3. AssetManager
+Merupakan class static yang memiliki fungsi untuk menyimpan asset berupa sprite image agar class `Sprite` tidak perlu mengeload ulang. Hal ini dilakukan untuk menghemat performa game. Di inisialisasi pada `mainApp` yang juga menggunakan prinsip singleton pattern.
+
 ### 4. AchievementSystem
+Merupakan class static yang memiliki fungsi untuk save dan load suatu achievement. Class ini mengimplementasikan serialization agar mempermudah save dan load suatu achievement. Setiap kali masuk gameplay akan di load dan setiap selesai gameplay achievement akan disimpan. Di inisialisasi pada `mainApp` yang juga menggunakan prinsip singleton pattern.
+
 ### 5. HighscoreSystem
+Merupakan class static yang memiliki fungsi untuk save dan load suatu highscore. Class ini mengimplementasikan serialization agar mempermudah save dan load suatu highscore. Setiap kali masuk gameplay akan di load dan setiap selesai gameplay achievement akan disimpan. Di inisialisasi pada `mainApp` yang juga menggunakan prinsip singleton pattern.
+
 ### 6. GameMaster
+Merupakan class yang sangat penting pada game ini. `GameMaster` merupakan class yang mengatur gameplay pada permainan pada `SceneGameplay`. Pada dasarnya `GameMaster` melakukan seluruh pekerjaan tentang mekanisme game yang terjadi. Sebagai contohnya adalah tempat `Ball` untuk di populasi dan generate, tempat untuk menyimpan `score`, `combo`, `miss` dan lain sebagainya. Terdapat method untuk memilih planet yang benar atau salah sehingga game dapat dimainkan.
+
 ### 7. Scene
+Merupakan inhertance dari JPanel. Merupakan class yang digunakan untuk menggambar suatu scene. Class `Scene` telah didesain sedemikian rupa agar dapat digunakan sebagai superclass dari scene - scene yang lainnya. Karena class `Scene` terdapat 2 method yang dapat di override yaitu `DrawObjects` dan `ClearObjects`.
+
 ### 8. SceneMainMenu
+Merupakan inhertance dari class `Scene` yang memiliki fungsi untuk menggambar scene Main Menu Game. Memiliki internal class bernama `TAdapter` yang digunakan sebagai key listener suatu scene pada JPanel yang merupakan superclass dari class `Scene`.
+
 ### 9. SceneGameplay
+Merupakan inhertance dari class `Scene` yang memiliki fungsi untuk menggambar scene Gameplay Game. Memiliki internal class bernama `TAdapter` yang digunakan sebagai key listener suatu scene pada JPanel yang merupakan superclass dari class `Scene` yang digunakan untuk memainkan game.
+
 ### 10. SceneHighscore
+Merupakan inhertance dari class `Scene` yang memiliki fungsi untuk menggambar scene Highscore Game. Memiliki internal class bernama `TAdapter` yang digunakan sebagai key listener suatu scene pada JPanel yang merupakan superclass dari class `Scene`.
+
 ### 11. SceneAchievement
+Merupakan inhertance dari class `Scene` yang memiliki fungsi untuk menggambar scene Achievement Game. Memiliki internal class bernama `TAdapter` yang digunakan sebagai key listener suatu scene pada JPanel yang merupakan superclass dari class `Scene`.
+
 ### 12. SceneCredits
+Merupakan inhertance dari class `Scene` yang memiliki fungsi untuk menggambar scene Credits Game. Memiliki internal class bernama `TAdapter` yang digunakan sebagai key listener suatu scene pada JPanel yang merupakan superclass dari class `Scene`.
+
 ### 13. Sprite
+Merupakan class utama yang digunakan untuk menampung `Image` gambar pada AssetManager. Sprite memiliki property posX dan posY, dan behaviour draw, sehingga `Sprite` dapat digambar dengan mudah pada class `Scene`
+
 ### 14. Ball
+Merupakan inhertance dari class Sprite. Ball merupakan planet pada Gameplay, kami menggunakan nama ball tidak planet dengan alasan agar dapat dipahami dengan lebih universal. Terdapat behaviour yang digunakan untuk mengatur animation yaitu `Animating()`, dengan behaviour ini menggambar planet dan mengatur posisi planet dapat dilakukan dengan mudah.
+
 ### 15. Button
+Merupakan suatu class button yang menampung banyak sprite, sehingga kami dapat membuat sesuatu seperti animasi standard, hover dan clicked pada button. Memiliki behaviour yang digunakan untuk mengganti state sekarang pada class `Button` ini.
 
 ## Interface
 ### 1. IScene
+Sebuah interface yang mengandung beberapa action dan behaviour mengenai perilaku yang digunakan oleh class `Scene`.
+
+## D. Perubahan dari adaptasi Referensi
+Seperti yang telah dibahas sebelumnya, bahwa game Planet Pang mengadaptasi dari game Jungle Pang milik LINE. Berikut merupakan fitur - fitur yang kami tambahkan pada game Planet Pang yang tidak ada pada game Jungle Pang.
+- Frenzy System - merupakan gameplay yang dinamis, setiap melakukan combo, seluruh planet berpindah ke kiri atau ke kanan sesuai dengan kondisi sekarang.
+- Achievement System - merupakan penambahan sistem pencapaian hasil dari pemain atau player sehingga dapat bermain dan memiliki tujuan untuk bermain.
+- Menggunakan Planet bukan Binatang - merupakan tema yang kami pikirkan dan sprite hasil buatan sendiri, sehingga dapat dikatakan bahwa kami mengubah gameplay dari binatang menjadi planet.
 
 # Terima Kasih
